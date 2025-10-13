@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agregar Músicos a Banda</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-light bg-white border-bottom sticky-top">
+  <a href="hu04_artist_detail.html" class="btn btn-link p-0">‹ Volver</a>
+  <span class="mx-auto h6 mb-0">Músicos</span><span></span>
+</nav>
+
+<div class="container py-3">
+  <form>
+    <div class="form-group">
+      <label for="band">Banda</label>
+      <select id="band" class="form-control">
+        <option>Daft Punk</option>
+        <option>Radiohead</option>
+        <option>Pink Floyd</option>
+      </select>
+    </div>
+
+    <h6 class="text-uppercase text-muted">Integrantes actuales</h6>
+    <ul class="list-group mb-3">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Thomas Bangalter <span class="badge badge-light">Productor / Teclados</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Guy-Manuel de Homem-Christo <span class="badge badge-light">Productor / Guitarra</span>
+      </li>
+    </ul>
+
+    <h6 class="text-uppercase text-muted">Agregar músico</h6>
+    <div class="form-group">
+      <label for="musician">Nombre del músico</label>
+      <input id="musician" class="form-control" placeholder="Nombre y apellido">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label for="role">Rol / Instrumento</label>
+        <input id="role" class="form-control" placeholder="Batería, Voz, etc.">
+      </div>
+      <div class="form-group col-3">
+        <label for="start">Inicio</label>
+        <input id="start" class="form-control" placeholder="1999">
+      </div>
+      <div class="form-group col-3">
+        <label for="end">Fin</label>
+        <input id="end" class="form-control" placeholder="—">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Agregar músico</button>
+  </form>
+</div>
+</body></html>

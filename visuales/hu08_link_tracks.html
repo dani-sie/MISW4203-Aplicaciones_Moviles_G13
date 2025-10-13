@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Asociar Tracks</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-DrT5Nf7bQxN1Z5qX6Ch12eDqOohMHDL/95B2S/bjhp4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+  <style>
+    body { background-color: #f8f9fa; }
+    .list-group-item input { transform: scale(1.2); margin-right: .5rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-light bg-white border-bottom sticky-top">
+    <a href="hu02_album_detail.html" class="btn btn-link p-0">‹ Volver</a>
+    <span class="mx-auto h6 mb-0">Asociar Tracks</span><span></span>
+  </nav>
+
+  <div class="container py-4">
+
+    <form id="linkTracksForm" data-entity="albumTrackLink">
+
+      <!-- Selección de álbum -->
+      <div class="form-group">
+        <label for="albumSel">Álbum</label>
+        <select id="albumSel" name="albumId" class="form-control">
+          <option value="">Selecciona un álbum...</option>
+          <option value="100" data-cover="https://i.pinimg.com/564x/aa/5f/ed/aa5fed7fac61cc8f41d1e79db917a7cd.jpg">
+            Buscando América — Rubén Blades (1984)
+          </option>
+          <option value="101" data-cover="https://cdn.shopify.com/s/files/1/0275/3095/products/image_4931268b-7acf-4702-9c55-b2b3a03ed999_1024x1024.jpg">
+            Poeta del pueblo — Rubén Blades (1984)
+          </option>
+          <option value="102" data-cover="https://upload.wikimedia.org/wikipedia/en/4/4d/Queen_A_Night_At_The_Opera.png">
+            A Night at the Opera — Queen (1975)
+          </option>
+        </select>
+      </div>
+
+      <!-- Tracks existentes -->
+      <h6 class="text-uppercase text-muted mt-4">Tracks existentes</h6>
+      <div class="list-group mb-3" id="tracksList">
+        <!-- Ejemplo de tracks del álbum seleccionado -->
+        <label class="list-group-item d-flex align-items-center" data-track-id="100">
+          <input type="checkbox" name="trackIds[]" value="100">
+          <div class="flex-fill">
+            <span>Decisiones</span>
+            <small class="text-muted ml-2">5:05</small>
+          </div>
+        </label>
+        <label class="list-group-item d-flex align-items-center" data-track-id="101">
+          <input type="checkbox" name="trackIds[]" value="101">
+          <div class="flex-fill">
+            <span>Desapariciones</span>
+            <small class="text-muted ml-2">6:29</small>
+          </div>
+        </label>
+      </div>
+
+      <!-- Agregar nuevo track -->
+      <h6 class="text-uppercase text-muted">Agregar nuevo track</h6>
+      <div class="form-row">
+        <div class="form-group col-8">
+          <label for="trackName">Título</label>
+          <input type="text" id="trackName" class="form-control" name="newTrack[name]" placeholder="Ej: Contact">
+        </div>
+        <div class="form-group col-4">
+          <label for="trackDur">Duración</label>
+          <input type="text" id="trackDur" class="form-control" name="newTrack[duration]" placeholder="7:47" pattern="^\\d{1,2}:\\d{2}$">
+        </div>
+      </div>
+      <button type="button" class="btn btn-outline-secondary btn-block mb-3" id="addTrackBtn">Agregar a la lista</button>
+
+      <!-- Acción principal -->
+      <button type="submit" class="btn btn-primary btn-block">Guardar asociación</button>
+    </form>
+
+  </div>
+
+  <script>
+    // Agregar un nuevo track dinámicamente (solo front-end)
+    document.getElementById('addTrackBtn').addEventListener('click', function() {
+      const name = document.getElementById('trackName').value.trim();
+      const dur = document.getElementById('trackDur').value.trim();
+      if (!name || !dur) return alert('Completa el título y la duración');
+
+      const list = document.getElementById('tracksList');
+      const newId = Date.now(); // id temporal
+      const label = document.createElement('label');
+      label.className = 'list-group-item d-flex align-items-center';
+      label.dataset.trackId = newId;
+      label.innerHTML = `
+        <input type="checkbox" name="trackIds[]" value="${newId}" checked>
+        <div class="flex-fill">
+          <span>${name}</span>
+          <small class="text-muted ml-2">${dur}</small>
+        </div>`;
+      list.appendChild(label);
+
+      // Limpia inputs
+      document.getElementById('trackName').value = '';
+      document.getElementById('trackDur').value = '';
+    });
+
+    // Validación mínima
+    (function(){
+      var form = document.getElementById('linkTracksForm');
+      form.addEventListener('submit', function(e){
+        if(!form.checkValidity()){
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    })();
+  </script>
+
+</body>
+</html>

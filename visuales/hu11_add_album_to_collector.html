@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agregar a Mi Colección</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-DrT5Nf7bQxN1Z5qX6Ch12eDqOohMHDL/95B2S/bjhp4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+<style>
+  .album-thumb { width:60px; height:60px; object-fit:cover; border-radius:.25rem; }
+  .font-weight-medium { font-weight:600; }
+  .result-card:hover { background:#fafafa; }
+</style>
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-light bg-white border-bottom sticky-top">
+  <a href="hu06_collector_detail.html" class="btn btn-link p-0">‹ Volver</a>
+  <span class="mx-auto h6 mb-0">Mi Colección</span><span></span>
+</nav>
+
+<div class="container py-3">
+
+  <!-- Form principal mapeado a collectorAlbums -->
+  <form id="collectionForm" class="needs-validation" novalidate data-entity="collectorAlbum">
+
+    <!-- Buscador / selección de álbum -->
+    <div class="form-group">
+      <label for="albumSearch">Buscar álbum</label>
+      <input type="search" id="albumSearch" class="form-control" placeholder="Título o artista">
+      <small class="form-text text-muted">Escribe para buscar y luego pulsa “Seleccionar”.</small>
+    </div>
+
+    <!-- Resultados (estáticos de ejemplo; hidratar después) -->
+    <div id="searchResults">
+
+      <!-- Resultado: Buscando América -->
+      <div class="card mb-3 result-card"
+           data-album-id="100"
+           data-album-name="Buscando América"
+           data-album-artist="Rubén Blades"
+           data-album-year="1984"
+           data-album-cover="https://i.pinimg.com/564x/aa/5f/ed/aa5fed7fac61cc8f41d1e79db917a7cd.jpg">
+        <div class="card-body d-flex align-items-center">
+          <img src="https://i.pinimg.com/564x/aa/5f/ed/aa5fed7fac61cc8f41d1e79db917a7cd.jpg" class="album-thumb mr-3" alt="Buscando América">
+          <div class="flex-fill">
+            <div class="font-weight-medium">Buscando América</div>
+            <small class="text-muted">Rubén Blades • 1984</small>
+          </div>
+          <button class="btn btn-outline-primary btn-sm btn-select" type="button">Seleccionar</button>
+        </div>
+      </div>
+
+      <!-- Resultado: Poeta del pueblo -->
+      <div class="card mb-3 result-card"
+           data-album-id="101"
+           data-album-name="Poeta del pueblo"
+           data-album-artist="Rubén Blades"
+           data-album-year="1984"
+           data-album-cover="https://cdn.shopify.com/s/files/1/0275/3095/products/image_4931268b-7acf-4702-9c55-b2b3a03ed999_1024x1024.jpg">
+        <div class="card-body d-flex align-items-center">
+          <img src="https://cdn.shopify.com/s/files/1/0275/3095/products/image_4931268b-7acf-4702-9c55-b2b3a03ed999_1024x1024.jpg" class="album-thumb mr-3" alt="Poeta del pueblo">
+          <div class="flex-fill">
+            <div class="font-weight-medium">Poeta del pueblo</div>
+            <small class="text-muted">Rubén Blades • 1984</small>
+          </div>
+          <button class="btn btn-outline-primary btn-sm btn-select" type="button">Seleccionar</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Resumen del álbum seleccionado -->
+    <div id="selectedAlbum" class="card mb-3 d-none">
+      <div class="card-body d-flex align-items-center">
+        <img id="selCover" src="" class="album-thumb mr-3" alt="cover">
+        <div class="flex-fill">
+          <div class="font-weight-medium" id="selTitle">—</div>
+          <small class="text-muted" id="selMeta">—</small>
+        </div>
+        <a id="selLink" href="#" class="btn btn-link btn-sm">Ver álbum</a>
+      </div>
+      <!-- Campo que tu backend necesita: albumId -->
+      <input type="hidden" name="collectorAlbum[albumId]" id="albumId" required>
+      <div class="invalid-feedback d-block px-3 pb-2" id="albumIdError" style="display:none">
+        Debes seleccionar un álbum.
+      </div>
+    </div>
+
+    <!-- Metadata de la copia del coleccionista -->
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label for="format">Formato <small class="text-muted">(opcional)</small></label>
+        <select id="format" name="collectorAlbum[format]" class="form-control">
+          <option value="">Selecciona…</option>
+          <option>Vinilo</option><option>CD</option><option>Cassette</option><option>Digital</option>
+        </select>
+      </div>
+      <div class="form-group col-6">
+        <label for="condition">Condición <small class="text-muted">(opcional)</small></label>
+        <select id="condition" name="collectorAlbum[condition]" class="form-control">
+          <option value="">Selecciona…</option>
+          <option>Nuevo</option><option>Como nuevo</option><option>Muy bueno</option>
+          <option>Bueno</option><option>Aceptable</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Estos dos sí están en tu JSON de ejemplo -->
+      <div class="form-group col-6">
+        <label for="status">Estado</label>
+        <select id="status" name="collectorAlbum[status]" class="form-control" required>
+          <option value="">Selecciona…</option>
+          <option value="CollectionOnly">Solo colección</option>
+          <option value="Active">En venta</option>
+          <option value="Trade">Para intercambio</option>
+        </select>
+        <div class="invalid-feedback">Selecciona el estado.</div>
+      </div>
+      <div class="form-group col-6">
+        <label for="price">Precio (opcional)</label>
+        <input type="number" class="form-control" id="price" name="collectorAlbum[price]" placeholder="USD">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Notas <small class="text-muted">(opcional)</small></label>
+      <textarea id="notes" name="collectorAlbum[notes]" rows="3" class="form-control" placeholder="Edición, color, firma, etc."></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Agregar a mi colección</button>
+  </form>
+</div>
+
+<script>
+  // Seleccionar álbum (solo front, sin backend)
+  document.querySelectorAll('.btn-select').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = this.closest('.result-card');
+      var id = card.dataset.albumId;
+      var name = card.dataset.albumName;
+      var artist = card.dataset.albumArtist || '';
+      var year = card.dataset.albumYear || '';
+      var cover = card.dataset.albumCover || '';
+
+      document.getElementById('albumId').value = id;
+      document.getElementById('selCover').src = cover;
+      document.getElementById('selTitle').textContent = name;
+      document.getElementById('selMeta').textContent = (artist && year) ? (artist + ' • ' + year) : (artist || year || '');
+      document.getElementById('selLink').href = 'hu02_album_detail.html?id=' + id;
+
+      document.getElementById('selectedAlbum').classList.remove('d-none');
+      document.getElementById('albumIdError').style.display = 'none';
+    });
+  });
+
+  // Validación mínima Bootstrap + obligación de elegir álbum
+  (function(){
+    var form = document.getElementById('collectionForm');
+    form.addEventListener('submit', function(e){
+      var albumId = document.getElementById('albumId').value;
+      if(!albumId){
+        e.preventDefault(); e.stopPropagation();
+        document.getElementById('albumIdError').style.display = 'block';
+        document.getElementById('selectedAlbum').classList.add('is-invalid');
+      }
+      if(!form.checkValidity()){
+        e.preventDefault(); e.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  })();
+</script>
+
+</body>
+</html>

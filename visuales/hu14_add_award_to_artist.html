@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asignar Premio a Artista</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-light bg-white border-bottom sticky-top">
+  <a href="hu04_artist_detail.html" class="btn btn-link p-0">‹ Volver</a>
+  <span class="mx-auto h6 mb-0">Premio a Artista</span><span></span>
+</nav>
+
+<div class="container py-3">
+  <form>
+    <div class="form-group">
+      <label for="artistSel">Artista</label>
+      <select id="artistSel" class="form-control">
+        <option>Daft Punk</option><option>Radiohead</option><option>Adele</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="awardSel">Premio</label>
+      <select id="awardSel" class="form-control">
+        <option>Grammy Awards</option><option>BRIT Awards</option><option>MTV Music Awards</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label for="awardYear">Año</label>
+        <input id="awardYear" class="form-control" placeholder="2014">
+      </div>
+      <div class="form-group col-6">
+        <label for="category">Categoría</label>
+        <input id="category" class="form-control" placeholder="Álbum del año">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="result">Resultado</label>
+      <select id="result" class="form-control">
+        <option>Ganador</option><option>Nominee</option><option>Mención</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="ref">Referencia (URL)</label>
+      <input id="ref" class="form-control" placeholder="https://sitio-oficial/prensa/...">
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Asignar premio</button>
+  </form>
+</div>
+</body></html>

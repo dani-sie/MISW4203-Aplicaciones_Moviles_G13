@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comentar Álbum</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-DrT5Nf7bQxN1Z5qX6Ch12eDqOohMHDL/95B2S/bjhp4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+<style>
+  .cover { width:56px; height:56px; object-fit:cover; border-radius:.25rem; }
+</style>
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-light bg-white border-bottom sticky-top">
+  <a href="hu02_album_detail.html" class="btn btn-link p-0">‹ Volver</a>
+  <span class="mx-auto h6 mb-0">Comentar</span><span></span>
+</nav>
+
+<div class="container py-3">
+
+  <!-- Encabezado del álbum (mapeado a JSON vía data-*) -->
+  <div class="media mb-3"
+       data-album-id="100"
+       data-album-name="Buscando América"
+       data-album-cover="https://i.pinimg.com/564x/aa/5f/ed/aa5fed7fac61cc8f41d1e79db917a7cd.jpg"
+       data-album-release-date="1984-08-01T00:00:00.000Z"
+       data-album-genre="Salsa"
+       data-album-record-label="Elektra">
+    <img src="https://i.pinimg.com/564x/aa/5f/ed/aa5fed7fac61cc8f41d1e79db917a7cd.jpg" class="mr-3 cover" alt="Buscando América">
+    <div class="media-body">
+      <strong>Buscando América</strong>
+      <div class="text-muted small">Salsa • 1984 • Elektra</div>
+    </div>
+  </div>
+
+  <!-- Formulario para crear comentario (alineado con comments[] del JSON) -->
+  <form id="commentForm" class="needs-validation" novalidate
+        data-entity="albumComment">
+    <!-- albumId oculto si lo necesitas en el backend -->
+    <input type="hidden" name="albumId" value="100">
+
+    <div class="form-group">
+      <label for="rating">Calificación</label>
+      <select class="form-control" id="rating" name="comment[rating]" required>
+        <option value="">Selecciona…</option>
+        <option value="1">★☆☆☆☆ (1)</option>
+        <option value="2">★★☆☆☆ (2)</option>
+        <option value="3">★★★☆☆ (3)</option>
+        <option value="4">★★★★☆ (4)</option>
+        <option value="5" selected>★★★★★ (5)</option>
+      </select>
+      <div class="invalid-feedback">Selecciona una calificación.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Tu comentario</label>
+      <textarea id="comment" name="comment[description]" rows="4" class="form-control"
+                placeholder="¿Qué te gustó del álbum?" required></textarea>
+      <div class="invalid-feedback">Escribe un comentario.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Publicar comentario</button>
+  </form>
+
+  <!-- Comentarios recientes (estructura alineada con comments[]) -->
+  <div class="mt-4">
+    <h6 class="text-uppercase text-muted">Comentarios recientes</h6>
+
+    <!-- Ejemplo 1 -->
+    <div class="card mb-2" data-comment-id="100" data-comment-rating="5">
+      <div class="card-body py-2">
+        <div class="d-flex justify-content-between">
+          <strong>@manolo</strong><small class="text-muted">★★★★★</small>
+        </div>
+        <p class="mb-0 small text-muted">The most relevant album of Ruben Blades</p>
+      </div>
+    </div>
+
+    <!-- Ejemplo 2 (otro layout listo para hidratar) -->
+    <div class="card mb-2" data-comment-id="101" data-comment-rating="5">
+      <div class="card-body py-2">
+        <div class="d-flex justify-content-between">
+          <strong>@jaime</strong><small class="text-muted">★★★★★</small>
+        </div>
+        <p class="mb-0 small text-muted">I love this album of Queen</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Validación mínima Bootstrap
+  (function(){
+    var form = document.getElementById('commentForm');
+    form.addEventListener('submit', function(e){
+      if(!form.checkValidity()){
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  })();
+</script>
+
+</body>
+</html>
