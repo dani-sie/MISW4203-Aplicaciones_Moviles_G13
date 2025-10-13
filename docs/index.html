@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MVP Vynil App · Navegación HU</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body { background:#f8f9fa; }
+    header { background:#343a40; color:#fff; padding:1rem; text-align:center; border-radius:0 0 10px 10px; }
+    .hu-card { transition: transform .15s ease-in-out; }
+    .hu-card:hover { transform: translateY(-3px); box-shadow:0 3px 8px rgba(0,0,0,.15); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1 class="h4 mb-0">🎵 Navegador de Historias de Usuario</h1>
+  <p class="mb-0 small text-light">MVP · Aplicaciones Móviles</p>
+</header>
+
+<div class="container my-4">
+  <div class="row">
+
+    <!-- HU01–HU06: navegación pública -->
+    <div class="col-12 mb-3">
+      <h6 class="text-uppercase text-muted mt-4 mb-2">Navegación pública</h6>
+    </div>
+    <div class="col-md-4 mb-3"><a href="hu01_albums.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU01 · Catálogo de álbumes</h6>
+        <small class="text-muted">Ver listado general de álbumes.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu02_album_detail.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU02 · Detalle de álbum</h6>
+        <small class="text-muted">Ver información de un álbum.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu03_artists.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU03 · Listado de artistas</h6>
+        <small class="text-muted">Explorar artistas disponibles.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu04_artist_detail.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU04 · Detalle de artista</h6>
+        <small class="text-muted">Ver biografía y álbumes.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu05_collectors.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU05 · Listado de coleccionistas</h6>
+        <small class="text-muted">Buscar coleccionistas.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu06_collector_detail.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU06 · Detalle de coleccionista</h6>
+        <small class="text-muted">Ver perfil y colecciones.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu09_comment_album.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU09 · Comentar álbum</h6>
+        <small class="text-muted">Escribir reseña o calificación.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu10_favorite_artists.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU10 · Artistas favoritos</h6>
+        <small class="text-muted">Agregar o quitar favoritos.</small>
+      </div></div></a></div>
+
+    <!-- HU07–HU15: gestión -->
+    <div class="col-12 mb-3">
+      <h6 class="text-uppercase text-muted mt-4 mb-2">Gestión / Backoffice</h6>
+    </div>
+
+    <div class="col-md-4 mb-3"><a href="hu07_create_album.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU07 · Crear álbum</h6>
+        <small class="text-muted">Formulario de creación.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu08_link_tracks.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU08 · Asociar tracks</h6>
+        <small class="text-muted">Vincular canciones a un álbum.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu11_add_album_to_collector.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU11 · Agregar álbum a coleccionista</h6>
+        <small class="text-muted">Agregar álbum a colección.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu12_add_musicians_to_band.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU12 · Agregar músicos</h6>
+        <small class="text-muted">Gestionar integrantes de banda.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu13_create_award.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU13 · Crear premios</h6>
+        <small class="text-muted">Registrar nuevos reconocimientos.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu14_add_award_to_artist.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU14 · Agregar premio a artista</h6>
+        <small class="text-muted">Asociar premio existente.</small>
+      </div></div></a></div>
+
+    <div class="col-md-4 mb-3"><a href="hu15_add_album_to_artist.html" class="text-reset text-decoration-none">
+      <div class="card hu-card"><div class="card-body">
+        <h6 class="card-title mb-1">HU15 · Agregar álbum a artista</h6>
+        <small class="text-muted">Vincular álbum y artista.</small>
+      </div></div></a></div>
+
+  </div>
+</div>
+
+<footer class="text-center text-muted small pb-3">
+  <hr>
+  <div>© 2025 Aplicaciones Móviles — MVP Vynil App</div>
+  <div><a href="https://github.com/" class="text-reset">GitHub Pages</a></div>
+</footer>
+
+</body>
+</html>
