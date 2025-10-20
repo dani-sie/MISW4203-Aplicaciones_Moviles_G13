@@ -2,7 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- Fuerza layout de 390px en cualquier dispositivo -->
+  <meta name="viewport" content="width=390, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#ffffff">
 
   <title>Catálogo de Álbumes</title>
 
@@ -13,80 +15,58 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
   <style>
-    body {
-      font-size: 15px;
-      background-color: #f8f9fa;
+    /* ====== MODO "MOBILE OBLIGATORIO" ====== */
+    html, body {
+      height: 100%;
+      background: #f8f9fa;
+      overflow-x: hidden;
+    }
+    /* Limita TODA la página al ancho de un teléfono */
+    body.force-mobile {
+      max-width: 390px;              /* iPhone 12/13/14 aprox */
+      margin: 0 auto;                /* centra en desktop */
+      box-shadow: 0 0 0 transparent; /* evita sombras raras */
+      -webkit-text-size-adjust: 100%;
+    }
+    /* Anula columnas múltiples de Bootstrap: siempre 1 columna */
+    .force-mobile .row > [class^="col-"],
+    .force-mobile .row > [class*=" col-"] {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
     }
 
-    .navbar {
-      padding: 0.5rem 1rem;
+    /* Nav compacta y buscador redondeado */
+    .navbar { padding: .5rem .75rem; }
+    .navbar-brand { font-weight: 700; font-size: 1.1rem; }
+    .navbar .form-inline { width: 72%; }
+    .navbar .form-control {
+      border-radius: 999px;
+      padding: .45rem .9rem;
+      font-size: .95rem;
     }
 
-    .form-inline input {
-      border-radius: 50px;
-      padding: 0.4rem 0.8rem;
-      font-size: 14px;
+    /* Cards y medios */
+    .card { border-radius: .85rem; overflow: hidden; }
+    .album-cover { width: 100%; height: 200px; object-fit: cover; }
+    .badge-pill { font-weight: 600; font-size: .8rem; padding: .45em .6em; }
+    .performer-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+
+    /* Ajustes finos en pantallas pequeñas */
+    @media (max-width: 420px) {
+      .card-body { padding: .9rem; }
+      .card-title { font-size: 1rem; }
+      small.text-muted { font-size: .85rem; }
     }
 
-    .album-cover {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-top-left-radius: 0.5rem;
-      border-top-right-radius: 0.5rem;
-    }
-
-    .card {
-      border-radius: 0.75rem;
-      overflow: hidden;
-      transition: transform 0.15s ease-in-out;
-    }
-
-    .card:hover {
-      transform: scale(1.02);
-    }
-
-    .badge-pill {
-      font-weight: 500;
-      font-size: 13px;
-      padding: 0.4em 0.6em;
-    }
-
-    .performer-avatar {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-
-    .collapse {
-      background-color: #fff;
-      border-radius: 0.5rem;
-      padding: 0.75rem;
-    }
-
-    @media (max-width: 576px) {
-      .card-body {
-        padding: 0.9rem;
-      }
-      h5.card-title {
-        font-size: 1rem;
-      }
-      small.text-muted {
-        font-size: 13px;
-      }
-      .navbar-brand {
-        font-size: 1.1rem;
-      }
-    }
+    /* Evita zoom por doble tap en iOS */
+    * { touch-action: manipulation; }
   </style>
 </head>
-
-<body>
+<body class="force-mobile">
   <nav class="navbar navbar-light bg-white border-bottom sticky-top">
-    <span class="navbar-brand mb-0 font-weight-bold">🎵 Catálogo</span>
-    <form class="form-inline w-75">
-      <input class="form-control form-control-sm w-100" type="search" placeholder="Buscar álbum o artista">
+    <span class="navbar-brand mb-0">🎵 Catálogo</span>
+    <form class="form-inline">
+      <input class="form-control form-control-sm" type="search" placeholder="Buscar álbum o artista">
     </form>
   </nav>
 
@@ -96,13 +76,13 @@
       <!-- Álbum 100 -->
       <div class="col-12 mb-3">
         <a href="hu02_album_detail.html?id=100" class="text-decoration-none text-reset">
-          <div class="card shadow-sm">
+          <div class="card shadow-sm" data-id="100" data-name="Buscando América" data-release="1984-08-01T00:00:00.000Z" data-genre="Salsa" data-record-label="Elektra">
             <img class="card-img-top album-cover" src="https://i.pinimg.com/564x/aa/5f/ed/aa5fed7fac61cc8f41d1e79db917a7cd.jpg" alt="cover Buscando América">
             <div class="card-body">
               <h5 class="card-title mb-1 text-truncate">Buscando América</h5>
               <small class="text-muted d-block mb-2">Salsa • 1984 • Elektra</small>
               <p class="card-text small text-muted mb-2">
-                Buscando América es el primer álbum de Rubén Blades y Seis del Solar lanzado en 1984...
+                Buscando América es el primer álbum de la banda de Rubén Blades y Seis del Solar lanzado en 1984...
               </p>
               <div class="d-flex align-items-center mb-2">
                 <span class="badge badge-primary badge-pill mr-2">2 pistas</span>
@@ -142,9 +122,113 @@
         </a>
       </div>
 
-      <!-- Resto de álbumes idéntico con las mismas clases... -->
-      <!-- Álbum 101, 102, 103 -->
-      <!-- (puedes conservar tus bloques originales, solo cambiando col-md-6 -> col-12 y aplicando este mismo estilo) -->
+      <!-- Álbum 101 -->
+      <div class="col-12 mb-3">
+        <a href="hu02_album_detail.html?id=101" class="text-decoration-none text-reset">
+          <div class="card shadow-sm" data-id="101" data-name="Poeta del pueblo" data-release="1984-08-01T00:00:00.000Z" data-genre="Salsa" data-record-label="Elektra">
+            <img class="card-img-top album-cover" src="https://cdn.shopify.com/s/files/1/0275/3095/products/image_4931268b-7acf-4702-9c55-b2b3a03ed999_1024x1024.jpg" alt="cover Poeta del pueblo">
+            <div class="card-body">
+              <h5 class="card-title mb-1 text-truncate">Poeta del pueblo</h5>
+              <small class="text-muted d-block mb-2">Salsa • 1984 • Elektra</small>
+              <p class="card-text small text-muted mb-2">
+                Recopilación de 27 composiciones del cosmos Blades que los bailadores y melómanos han hecho suyas...
+              </p>
+              <div class="d-flex align-items-center mb-2">
+                <span class="badge badge-primary badge-pill mr-2">0 pistas</span>
+                <span class="badge badge-info badge-pill mr-2">1 intérprete</span>
+                <span class="badge badge-warning badge-pill">0 comentarios</span>
+              </div>
+              <a class="btn btn-block btn-sm btn-outline-secondary" data-toggle="collapse" href="#detalles-101" role="button">Ver detalles</a>
+              <div class="collapse mt-3" id="detalles-101">
+                <h6 class="mb-2">Intérprete</h6>
+                <div class="media mb-0">
+                  <img class="mr-2 performer-avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Ruben_Blades_by_Gage_Skidmore.jpg/800px-Ruben_Blades_by_Gage_Skidmore.jpg" alt="Rubén Blades">
+                  <div class="media-body">
+                    <strong>Rubén Blades Bellido de Luna</strong><br>
+                    <small class="text-muted">Nac.: 1948-07-16</small><br>
+                    <small class="text-muted">Cantante, compositor, actor y activista panameño.</small>
+                  </div>
+                </div>
+                <div class="alert alert-light mt-3 mb-0">No hay tracks ni comentarios.</div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Álbum 102 -->
+      <div class="col-12 mb-3">
+        <a href="hu02_album_detail.html?id=102" class="text-decoration-none text-reset">
+          <div class="card shadow-sm" data-id="102" data-name="A Night at the Opera" data-release="1975-11-21T00:00:00.000Z" data-genre="Rock" data-record-label="EMI">
+            <img class="card-img-top album-cover" src="https://upload.wikimedia.org/wikipedia/en/4/4d/Queen_A_Night_At_The_Opera.png" alt="cover A Night at the Opera">
+            <div class="card-body">
+              <h5 class="card-title mb-1 text-truncate">A Night at the Opera</h5>
+              <small class="text-muted d-block mb-2">Rock • 1975 • EMI</small>
+              <p class="card-text small text-muted mb-2">
+                Cuarto álbum de estudio de Queen, publicado en 1975; en su momento, la producción más cara realizada...
+              </p>
+              <div class="d-flex align-items-center mb-2">
+                <span class="badge badge-primary badge-pill mr-2">0 pistas</span>
+                <span class="badge badge-info badge-pill mr-2">1 intérprete</span>
+                <span class="badge badge-warning badge-pill">1 comentario</span>
+              </div>
+              <a class="btn btn-block btn-sm btn-outline-secondary" data-toggle="collapse" href="#detalles-102" role="button">Ver detalles</a>
+              <div class="collapse mt-3" id="detalles-102">
+                <h6 class="mb-2">Intérprete</h6>
+                <div class="media mb-3">
+                  <img class="mr-2 performer-avatar" src="https://pm1.narvii.com/6724/a8b29909071e9d08517b40c748b6689649372852v2_hq.jpg" alt="Queen">
+                  <div class="media-body">
+                    <strong>Queen</strong><br>
+                    <small class="text-muted">Desde: 1970-01-01</small><br>
+                    <small class="text-muted">Banda británica de rock formada en 1970 en Londres...</small>
+                  </div>
+                </div>
+                <h6 class="mb-2">Comentarios</h6>
+                <div class="border rounded p-2 bg-light">
+                  <div class="d-flex justify-content-between">
+                    <small>I love this album of Queen</small>
+                    <span class="badge badge-success">★ 5</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Álbum 103 -->
+      <div class="col-12 mb-3">
+        <a href="hu02_album_detail.html?id=103" class="text-decoration-none text-reset">
+          <div class="card shadow-sm" data-id="103" data-name="A Day at the Races" data-release="1976-12-10T00:00:00.000Z" data-genre="Rock" data-record-label="EMI">
+            <img class="card-img-top album-cover" src="https://www.udiscovermusic.com/wp-content/uploads/2019/11/a-day-at-the-races.jpg" alt="cover A Day at the Races">
+            <div class="card-body">
+              <h5 class="card-title mb-1 text-truncate">A Day at the Races</h5>
+              <small class="text-muted d-block mb-2">Rock • 1976 • EMI</small>
+              <p class="card-text small text-muted mb-2">
+                Grabado en Sarm West, The Manor y Wessex (UK). Título en referencia directa a “A Night at the Opera”.
+              </p>
+              <div class="d-flex align-items-center mb-2">
+                <span class="badge badge-primary badge-pill mr-2">0 pistas</span>
+                <span class="badge badge-info badge-pill mr-2">1 intérprete</span>
+                <span class="badge badge-warning badge-pill">0 comentarios</span>
+              </div>
+              <a class="btn btn-block btn-sm btn-outline-secondary" data-toggle="collapse" href="#detalles-103" role="button">Ver detalles</a>
+              <div class="collapse mt-3" id="detalles-103">
+                <h6 class="mb-2">Intérprete</h6>
+                <div class="media">
+                  <img class="mr-2 performer-avatar" src="https://pm1.narvii.com/6724/a8b29909071e9d08517b40c748b6689649372852v2_hq.jpg" alt="Queen">
+                  <div class="media-body">
+                    <strong>Queen</strong><br>
+                    <small class="text-muted">Desde: 1970-01-01</small><br>
+                    <small class="text-muted">Banda británica de rock formada en 1970 en Londres...</small>
+                  </div>
+                </div>
+                <div class="alert alert-light mt-3 mb-0">No hay tracks ni comentarios.</div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
 
     </div>
   </div>
