@@ -1,128 +1,173 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta name="viewport" content="width=390, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Detalle Álbum</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-DrT5Nf7bQxN1Z5qX6Ch12eDqOohMHDL/95B2S/bjhp4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
-<style>
-  .cover { width:84px; height:84px; object-fit:cover; }
-  .performer-avatar { width:40px; height:40px; border-radius:50%; object-fit:cover; }
-  .badge-pill { font-weight:500; }
-</style>
+  <meta charset="utf-8">
+  <!-- Fuerza layout de 390px en todo dispositivo -->
+  <meta name="viewport" content="width=390, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#ffffff">
+  <title>Detalle Álbum</title>
+
+  <!-- Bootstrap 4.6.2 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+  <style>
+    /* ====== MODO "MOBILE OBLIGATORIO" ====== */
+    html, body { height: 100%; background: #ffffff; overflow-x: hidden; }
+    body.force-mobile {
+      max-width: 390px;          /* ancho típico teléfono */
+      margin: 0 auto;            /* centrado en desktop */
+      -webkit-text-size-adjust: 100%;
+    }
+    /* Anula columnas múltiples si las hubiera */
+    .force-mobile .row > [class^="col-"],
+    .force-mobile .row > [class*=" col-"] {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+
+    /* Navbar compacta */
+    .navbar { padding: .5rem .75rem; }
+    .navbar .btn-link { font-size: .95rem; }
+    .navbar .h6 { font-size: 1rem; font-weight: 700; }
+
+    /* Encabezado del álbum */
+    section.header {
+      padding: .9rem .9rem 1rem;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+    }
+    .cover { width: 84px; height: 84px; object-fit: cover; border-radius: .5rem; }
+    .performer-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+    .badge-pill { font-weight: 600; }
+    .btn-sm { padding: .35rem .75rem; }
+
+    /* Texto y espaciados */
+    .section-title { text-transform: uppercase; letter-spacing: .02em; color: #6c757d; font-size: .85rem; }
+    .small, small { font-size: .9rem; }
+
+    /* Listas tocables */
+    .list-group-item {
+      padding-top: .8rem; padding-bottom: .8rem;
+    }
+    .list-group-item .badge { font-size: .85rem; }
+
+    /* Enlaces útiles al final */
+    .footer-actions { padding-bottom: 1rem; }
+
+    /* Ajustes finos pantallas pequeñas */
+    @media (max-width: 420px) {
+      .media .mt-0 { font-size: 1.05rem; }
+    }
+
+    /* Evita zoom por doble tap en iOS */
+    * { touch-action: manipulation; }
+  </style>
 </head>
-<body class="bg-white">
+<body class="force-mobile bg-white">
 
-<nav class="navbar navbar-light bg-white border-bottom sticky-top">
-  <a href="hu01_albums.html" class="btn btn-link p-0">‹ Volver</a>
-  <span class="mx-auto h6 mb-0">Álbum</span>
-  <span></span>
-</nav>
+  <nav class="navbar navbar-light bg-white border-bottom sticky-top">
+    <a href="hu01_albums.html" class="btn btn-link p-0">‹ Volver</a>
+    <span class="mx-auto h6 mb-0">Álbum</span>
+    <span style="width:40px;"></span> <!-- spacer para mantener título centrado -->
+  </nav>
 
-<!-- CONTENEDOR CON data-* PARA MAPEAR CAMPOS DEL JSON -->
-<section class="p-3 bg-light"
-  data-id="100"
-  data-name="Buscando América"
-  data-cover="https://i.pinimg.com/564x/aa/5f/ed/aa5fed7fac61cc8f41d1e79db917a7cd.jpg"
-  data-release-date="1984-08-01T00:00:00.000Z"
-  data-genre="Salsa"
-  data-record-label="Elektra">
-  <div class="media">
-    <img class="mr-3 rounded cover" src="https://i.pinimg.com/564x/aa/5f/ed/aa5fed7fac61cc8f41d1e79db917a7cd.jpg" alt="cover Buscando América">
-    <div class="media-body">
-      <h5 class="mt-0 mb-1">Buscando América</h5>
-      <small class="text-muted d-block">
-        Salsa • 1984 • Elektra • 2 tracks
-      </small>
-      <div class="mt-2">
-        <button class="btn btn-sm btn-primary">Reproducir</button>
-        <button class="btn btn-sm btn-outline-secondary">Guardar</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="container py-3">
-
-  <!-- Descripción -->
-  <div class="mb-3">
-    <h6 class="text-uppercase text-muted mb-1">Descripción</h6>
-    <p class="mb-0 small text-secondary">
-      Buscando América es el primer álbum de la banda de Rubén Blades y Seis del Solar lanzado en 1984.
-      La producción, bajo el sello Elektra, fusiona diferentes ritmos musicales tales como la salsa, reggae,
-      rock, y el jazz latino. El disco fue grabado en Eurosound Studios en Nueva York entre mayo y agosto de 1983.
-    </p>
-  </div>
-
-  <!-- Metadatos rápidos -->
-  <div class="mb-4">
-    <span class="badge badge-info badge-pill mr-2">Género: Salsa</span>
-    <span class="badge badge-secondary badge-pill mr-2">Sello: Elektra</span>
-    <span class="badge badge-light badge-pill">Lanzamiento: 1984-08-01</span>
-  </div>
-
-  <!-- Tracks -->
-  <h6 class="text-uppercase text-muted">Tracks</h6>
-  <ul class="list-group">
-    <!-- track id=100 -->
-    <li class="list-group-item d-flex justify-content-between align-items-center"
-        data-track-id="100" data-track-name="Decisiones" data-track-duration="5:05">
-      <div>
-        <span class="text-muted mr-2">1.</span> Decisiones
-      </div>
-      <span class="badge badge-light">5:05</span>
-    </li>
-    <!-- track id=101 -->
-    <li class="list-group-item d-flex justify-content-between align-items-center"
-        data-track-id="101" data-track-name="Desapariciones" data-track-duration="6:29">
-      <div>
-        <span class="text-muted mr-2">2.</span> Desapariciones
-      </div>
-      <span class="badge badge-light">6:29</span>
-    </li>
-  </ul>
-
-  <!-- Intérpretes -->
-  <div class="mt-4">
-    <h6 class="text-uppercase text-muted">Intérpretes</h6>
-    <div class="media align-items-center p-2 border rounded"
-         data-performer-id="100"
-         data-performer-name="Rubén Blades Bellido de Luna"
-         data-performer-birthdate="1948-07-16T00:00:00.000Z">
-      <img class="mr-2 performer-avatar"
-           src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Ruben_Blades_by_Gage_Skidmore.jpg/800px-Ruben_Blades_by_Gage_Skidmore.jpg"
-           alt="Rubén Blades">
+  <!-- CONTENEDOR CON data-* PARA MAPEAR CAMPOS DEL JSON -->
+  <section class="header"
+    data-id="100"
+    data-name="Buscando América"
+    data-cover="https://i.pinimg.com/564x/aa/5f/ed/aa5fed7fac61cc8f41d1e79db917a7cd.jpg"
+    data-release-date="1984-08-01T00:00:00.000Z"
+    data-genre="Salsa"
+    data-record-label="Elektra">
+    <div class="media align-items-center">
+      <img class="mr-3 cover" src="https://i.pinimg.com/564x/aa/5f/ed/aa5fed7fac61cc8f41d1e79db917a7cd.jpg" alt="cover Buscando América">
       <div class="media-body">
-        <strong class="d-block">Rubén Blades Bellido de Luna</strong>
-        <small class="text-muted d-block">Nac.: 1948-07-16</small>
-        <small class="text-muted">Cantante, compositor, músico, actor, abogado, político y activista panameño. Ha desarrollado gran parte de su carrera artística en Nueva York.</small>
+        <h5 class="mt-0 mb-1">Buscando América</h5>
+        <small class="text-muted d-block">
+          Salsa • 1984 • Elektra • 2 tracks
+        </small>
+        <div class="mt-2">
+          <button class="btn btn-sm btn-primary">Reproducir</button>
+          <button class="btn btn-sm btn-outline-secondary">Guardar</button>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Comentarios -->
-  <div class="mt-4">
-    <h6 class="text-uppercase text-muted">Comentarios</h6>
+  <div class="container py-3">
 
-    <!-- comment id=100 -->
-    <div class="border rounded p-2 mb-2" data-comment-id="100" data-comment-rating="5">
-      <div class="d-flex justify-content-between">
-        <small class="mb-1">The most relevant album of Ruben Blades</small>
-        <span class="badge badge-success">★ 5</span>
+    <!-- Descripción -->
+    <div class="mb-3">
+      <h6 class="section-title mb-1">Descripción</h6>
+      <p class="mb-0 small text-secondary">
+        Buscando América es el primer álbum de la banda de Rubén Blades y Seis del Solar lanzado en 1984.
+        La producción, bajo el sello Elektra, fusiona diferentes ritmos musicales tales como la salsa, reggae,
+        rock, y el jazz latino. El disco fue grabado en Eurosound Studios en Nueva York entre mayo y agosto de 1983.
+      </p>
+    </div>
+
+    <!-- Metadatos rápidos -->
+    <div class="mb-4">
+      <span class="badge badge-info badge-pill mr-2">Género: Salsa</span>
+      <span class="badge badge-secondary badge-pill mr-2">Sello: Elektra</span>
+      <span class="badge badge-light badge-pill">Lanzamiento: 1984-08-01</span>
+    </div>
+
+    <!-- Tracks -->
+    <h6 class="section-title">Tracks</h6>
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center"
+          data-track-id="100" data-track-name="Decisiones" data-track-duration="5:05">
+        <div><span class="text-muted mr-2">1.</span> Decisiones</div>
+        <span class="badge badge-light">5:05</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center"
+          data-track-id="101" data-track-name="Desapariciones" data-track-duration="6:29">
+        <div><span class="text-muted mr-2">2.</span> Desapariciones</div>
+        <span class="badge badge-light">6:29</span>
+      </li>
+    </ul>
+
+    <!-- Intérpretes -->
+    <div class="mt-4">
+      <h6 class="section-title">Intérpretes</h6>
+      <div class="media align-items-center p-2 border rounded"
+           data-performer-id="100"
+           data-performer-name="Rubén Blades Bellido de Luna"
+           data-performer-birthdate="1948-07-16T00:00:00.000Z">
+        <img class="mr-2 performer-avatar"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Ruben_Blades_by_Gage_Skidmore.jpg/800px-Ruben_Blades_by_Gage_Skidmore.jpg"
+             alt="Rubén Blades">
+        <div class="media-body">
+          <strong class="d-block">Rubén Blades Bellido de Luna</strong>
+          <small class="text-muted d-block">Nac.: 1948-07-16</small>
+          <small class="text-muted">
+            Cantante, compositor, músico, actor, abogado, político y activista panameño. Ha desarrollado gran parte de su carrera artística en Nueva York.
+          </small>
+        </div>
       </div>
     </div>
 
-    <a href="hu09_comment_album.html?id=100" class="btn btn-outline-primary btn-block mt-2">Comentar este álbum</a>
-  </div>
+    <!-- Comentarios -->
+    <div class="mt-4">
+      <h6 class="section-title">Comentarios</h6>
+      <div class="border rounded p-2 mb-2" data-comment-id="100" data-comment-rating="5">
+        <div class="d-flex justify-content-between">
+          <small class="mb-1">The most relevant album of Ruben Blades</small>
+          <span class="badge badge-success">★ 5</span>
+        </div>
+      </div>
+      <a href="hu09_comment_album.html?id=100" class="btn btn-outline-primary btn-block mt-2">Comentar este álbum</a>
+    </div>
 
-  <!-- Enlaces útiles -->
-  <div class="mt-4 text-right">
-    <a class="btn btn-link" href="hu01_albums.html">Volver al catálogo</a>
+    <!-- Enlaces útiles -->
+    <div class="mt-4 text-right footer-actions">
+      <a class="btn btn-link" href="hu01_albums.html">Volver al catálogo</a>
+    </div>
   </div>
-</div>
 
 </body>
 </html>
-
