@@ -2,26 +2,68 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Fuerza layout tipo teléfono -->
+  <meta name="viewport" content="width=390, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#ffffff">
   <title>Crear Álbum</title>
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-DrT5Nf7bQxN1Z5qX6Ch12eDqOohMHDL/95B2S/bjhp4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
   <style>
-    body { background-color: #f8f9fa; }
+    /* ====== MODO "MOBILE OBLIGATORIO" ====== */
+    html, body { height: 100%; background:#f8f9fa; overflow-x: hidden; }
+    body.force-mobile {
+      max-width: 390px;        /* ancho fijo estilo app móvil */
+      margin: 0 auto;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* Navbar */
+    .navbar { padding:.5rem .75rem; }
+    .navbar .btn-link { font-size:.95rem; }
+    .navbar .h6 { font-weight:700; font-size:1rem; }
+
+    /* Tarjeta de formulario */
+    .card { border-radius:.75rem; overflow:hidden; }
+    .card-body { padding: .9rem .9rem; }
+
+    /* Campos y etiquetas */
+    .form-group label { font-weight:600; }
+    .form-control, .custom-select { border-radius:.5rem; min-height:42px; }
+
+    /* Grid: fuerza 1 columna siempre (por si hay -md) */
+    .force-mobile .row > [class^="col-"],
+    .force-mobile .row > [class*=" col-"] {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+
+    /* Botón principal */
+    .btn { border-radius:.6rem; }
+    .btn-block { padding:.65rem; font-weight:600; }
+
+    /* Mejora táctil */
+    * { touch-action: manipulation; }
+
+    @media (max-width: 420px) {
+      .card-body { padding:.85rem; }
+    }
   </style>
 </head>
-<body>
+<body class="force-mobile">
 
   <!-- Barra superior -->
   <nav class="navbar navbar-light bg-white border-bottom sticky-top">
     <a href="hu01_albums.html" class="btn btn-link p-0">‹ Volver</a>
-    <span class="mx-auto h6 mb-0">Nuevo Álbum</span><span></span>
+    <span class="mx-auto h6 mb-0">Nuevo Álbum</span>
+    <span style="width:40px;"></span> <!-- espaciador para centrar título -->
   </nav>
 
   <!-- Contenedor principal -->
-  <div class="container py-4">
+  <div class="container py-3">
 
     <form id="albumForm" novalidate data-entity="album">
       <!-- Campos base del álbum -->
