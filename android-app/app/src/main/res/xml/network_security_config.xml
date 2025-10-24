@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Permitir cleartext para localhost y desarrollo -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+    </domain-config>
+
+    <!-- Permitir HTTPS para todos los dominios (por defecto) -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">*.pinimg.com</domain>
+        <domain includeSubdomains="true">*.shopify.com</domain>
+        <domain includeSubdomains="true">*.wikimedia.org</domain>
+        <domain includeSubdomains="true">upload.wikimedia.org</domain>
+    </domain-config>
+</network-security-config>
+

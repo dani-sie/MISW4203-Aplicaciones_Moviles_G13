@@ -11,7 +11,7 @@ import com.uniandes.vinylhub.data.model.Collector
 
 @Database(
     entities = [Album::class, Artist::class, Collector::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -31,7 +31,9 @@ abstract class VinylHubDatabase : RoomDatabase() {
                     context.applicationContext,
                     VinylHubDatabase::class.java,
                     "vinylhub_database"
-                ).build()
+                )
+                .fallbackToDestructiveMigration()
+                .build()
                 INSTANCE = instance
                 instance
             }

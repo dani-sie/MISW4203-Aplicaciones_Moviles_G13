@@ -20,7 +20,9 @@ class DatabaseModule {
             context.applicationContext,
             VinylHubDatabase::class.java,
             "vinylhub_database"
-        ).build()
+        )
+        .fallbackToDestructiveMigration()
+        .build()
     }
     
     @Singleton

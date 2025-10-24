@@ -16,7 +16,7 @@ import javax.inject.Singleton
 class NetworkModule {
     
     private companion object {
-        const val BASE_URL = "https://api.example.com/api/"
+        const val BASE_URL = "http://10.0.2.2:3000/"
     }
     
     @Singleton
@@ -25,12 +25,12 @@ class NetworkModule {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
-        
+
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
             .build()
     }
     

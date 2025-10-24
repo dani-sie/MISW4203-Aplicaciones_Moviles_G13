@@ -79,6 +79,9 @@ dependencies {
     // Serialization
     implementation(libs.kotlinx.serialization.json)
 
+    // Image Loading
+    implementation(libs.coil.compose)
+
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)

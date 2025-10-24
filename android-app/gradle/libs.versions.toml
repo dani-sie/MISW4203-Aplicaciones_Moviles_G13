@@ -16,6 +16,7 @@ mockito = "5.2.0"
 mockitoKotlin = "5.1.0"
 kotlinxSerializationJson = "1.6.0"
 composeNavigation = "2.8.0"
+coil = "2.6.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -61,6 +62,9 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 
 # Compose Navigation
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
+
+# Image Loading
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

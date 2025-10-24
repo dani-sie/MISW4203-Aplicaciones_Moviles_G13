@@ -11,15 +11,22 @@ import javax.inject.Inject
 class AlbumViewModel @Inject constructor(
     private val albumRepository: AlbumRepository
 ) : ViewModel() {
-    
+
     val albums: Flow<List<Album>> = albumRepository.getAllAlbums()
-    
+
+    init {
+        // Cargar datos del backend al inicializar
+        refreshAlbums()
+    }
+
     fun refreshAlbums() {
         viewModelScope.launch {
+            android.util.Log.d("AlbumViewModel", "refreshAlbums() called")
             albumRepository.refreshAlbums()
+            android.util.Log.d("AlbumViewModel", "refreshAlbums() completed")
         }
     }
-    
+
     suspend fun getAlbumById(id: Int): Album? {
         return albumRepository.getAlbumById(id)
     }
