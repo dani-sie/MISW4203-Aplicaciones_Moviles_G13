@@ -83,6 +83,11 @@ fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel
                 viewModel = albumViewModel,
                 onAlbumClick = { albumId ->
                     navController.navigate(NavRoutes.AlbumDetail.createRoute(albumId))
+                },
+                onBackToHome = {
+                    navController.navigate(NavRoutes.Home.route) {
+                        popUpTo(NavRoutes.Home.route) { inclusive = false }
+                    }
                 }
             )
         }
@@ -106,6 +111,11 @@ fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel
                 viewModel = artistViewModel,
                 onArtistClick = { artistId ->
                     navController.navigate(NavRoutes.ArtistDetail.createRoute(artistId))
+                },
+                onBackToHome = {
+                    navController.navigate(NavRoutes.Home.route) {
+                        popUpTo(NavRoutes.Home.route) { inclusive = false }
+                    }
                 }
             )
         }
@@ -121,6 +131,9 @@ fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel
                 viewModel = artistViewModel,
                 onBackClick = {
                     navController.popBackStack()
+                },
+                onAlbumClick = { albumId ->
+                    navController.navigate("album_detail/$albumId")
                 }
             )
         }
@@ -129,6 +142,11 @@ fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel
                 viewModel = collectorViewModel,
                 onCollectorClick = { collectorId ->
                     navController.navigate(NavRoutes.CollectorDetail.createRoute(collectorId))
+                },
+                onBackToHome = {
+                    navController.navigate(NavRoutes.Home.route) {
+                        popUpTo(NavRoutes.Home.route) { inclusive = false }
+                    }
                 }
             )
         }
@@ -144,6 +162,12 @@ fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel
                 viewModel = collectorViewModel,
                 onBackClick = {
                     navController.popBackStack()
+                },
+                onArtistClick = { artistId ->
+                    navController.navigate("artist_detail/$artistId")
+                },
+                onAlbumClick = { albumId ->
+                    navController.navigate("album_detail/$albumId")
                 }
             )
         }

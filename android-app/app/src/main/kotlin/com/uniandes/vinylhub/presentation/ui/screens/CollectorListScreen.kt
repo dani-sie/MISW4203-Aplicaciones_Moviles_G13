@@ -39,7 +39,8 @@ import com.uniandes.vinylhub.presentation.viewmodel.CollectorViewModel
 @Composable
 fun CollectorListScreen(
     viewModel: CollectorViewModel?,
-    onCollectorClick: (Int) -> Unit
+    onCollectorClick: (Int) -> Unit,
+    onBackToHome: () -> Unit = {}
 ) {
     val collectors: List<Collector> by viewModel?.collectors?.collectAsState(initial = emptyList()) ?: androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf(emptyList()) }
 
@@ -97,6 +98,17 @@ fun CollectorListScreen(
                     )
                 }
             }
+        }
+
+        // Back to home button
+        androidx.compose.material3.OutlinedButton(
+            onClick = onBackToHome,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
+            border = androidx.compose.foundation.BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1976D2))
+        ) {
+            androidx.compose.material3.Text("Volver al menú principal", color = androidx.compose.ui.graphics.Color(0xFF1976D2))
         }
     }
 }

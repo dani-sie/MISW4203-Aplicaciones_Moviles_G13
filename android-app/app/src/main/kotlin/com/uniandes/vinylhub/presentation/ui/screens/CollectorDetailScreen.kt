@@ -58,7 +58,9 @@ import com.uniandes.vinylhub.presentation.viewmodel.CollectorViewModel
 fun CollectorDetailScreen(
     collectorId: Int,
     viewModel: CollectorViewModel?,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onArtistClick: (Int) -> Unit = {},
+    onAlbumClick: (Int) -> Unit = {}
 ) {
     val collector = remember { mutableStateOf<Collector?>(null) }
     val isLoading = remember { mutableStateOf(true) }
@@ -125,6 +127,8 @@ fun CollectorDetailScreen(
                 CollectorDetailContent(
                     collector = collector.value!!,
                     onBackClick = onBackClick,
+                    onArtistClick = onArtistClick,
+                    onAlbumClick = onAlbumClick,
                     modifier = Modifier.padding(paddingValues)
                 )
             }
@@ -136,6 +140,8 @@ fun CollectorDetailScreen(
 fun CollectorDetailContent(
     collector: Collector,
     onBackClick: () -> Unit,
+    onArtistClick: (Int) -> Unit,
+    onAlbumClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -360,6 +366,17 @@ fun CollectorDetailContent(
                                 )
                             }
                         }
+
+                        // Ver button
+                        Button(
+                            onClick = { onArtistClick(performer.id) },
+                            colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFF00BCD4)
+                            ),
+                            modifier = Modifier.padding(start = 8.dp)
+                        ) {
+                            Text("Ver", fontSize = 12.sp)
+                        }
                     }
                 }
             }
@@ -431,7 +448,7 @@ fun CollectorDetailContent(
                             }
                             // Ver álbum link
                             TextButton(
-                                onClick = { /* TODO: Navigate to album */ }
+                                onClick = { onAlbumClick(album.id) }
                             ) {
                                 Text(
                                     text = "Ver álbum",
@@ -568,7 +585,7 @@ fun CollectorDetailScreenPreview() {
             )
         }
     ) { paddingValues ->
-        CollectorDetailContent(collector = sampleCollector, onBackClick = {}, modifier = Modifier.padding(paddingValues))
+        CollectorDetailContent(collector = sampleCollector, onBackClick = {}, onArtistClick = {}, onAlbumClick = {}, modifier = Modifier.padding(paddingValues))
     }
 }
 

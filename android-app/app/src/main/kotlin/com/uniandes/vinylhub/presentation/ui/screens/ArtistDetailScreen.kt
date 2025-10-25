@@ -52,7 +52,8 @@ import com.uniandes.vinylhub.presentation.viewmodel.ArtistViewModel
 fun ArtistDetailScreen(
     artistId: Int,
     viewModel: ArtistViewModel?,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onAlbumClick: (Int) -> Unit = {}
 ) {
     val artist = remember { mutableStateOf<Artist?>(null) }
     val isLoading = remember { mutableStateOf(true) }
@@ -115,6 +116,7 @@ fun ArtistDetailScreen(
                 ArtistDetailContent(
                     artist = artist.value!!,
                     onBackClick = onBackClick,
+                    onAlbumClick = onAlbumClick,
                     modifier = Modifier.padding(paddingValues)
                 )
             }
@@ -126,6 +128,7 @@ fun ArtistDetailScreen(
 fun ArtistDetailContent(
     artist: Artist,
     onBackClick: () -> Unit,
+    onAlbumClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -310,6 +313,17 @@ fun ArtistDetailContent(
                                 modifier = Modifier.padding(top = 4.dp)
                             )
                         }
+
+                        // Ver button
+                        Button(
+                            onClick = { onAlbumClick(album.id) },
+                            colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFF00BCD4)
+                            ),
+                            modifier = Modifier.padding(start = 8.dp)
+                        ) {
+                            Text("Ver", fontSize = 12.sp)
+                        }
                     }
                 }
             }
@@ -460,7 +474,7 @@ fun ArtistDetailScreenPreview() {
             )
         }
     ) { paddingValues ->
-        ArtistDetailContent(artist = sampleArtist, onBackClick = {}, modifier = Modifier.padding(paddingValues))
+        ArtistDetailContent(artist = sampleArtist, onBackClick = {}, onAlbumClick = {}, modifier = Modifier.padding(paddingValues))
     }
 }
 

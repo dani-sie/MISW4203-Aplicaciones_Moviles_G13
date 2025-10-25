@@ -36,7 +36,8 @@ import com.uniandes.vinylhub.presentation.viewmodel.ArtistViewModel
 @Composable
 fun ArtistListScreen(
     viewModel: ArtistViewModel,
-    onArtistClick: (Int) -> Unit
+    onArtistClick: (Int) -> Unit,
+    onBackToHome: () -> Unit = {}
 ) {
     val artists: List<Artist> by viewModel.artists.collectAsState(initial = emptyList())
 
@@ -93,6 +94,17 @@ fun ArtistListScreen(
                     )
                 }
             }
+        }
+
+        // Back to home button
+        androidx.compose.material3.OutlinedButton(
+            onClick = onBackToHome,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
+            border = androidx.compose.foundation.BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1976D2))
+        ) {
+            androidx.compose.material3.Text("Volver al menú principal", color = androidx.compose.ui.graphics.Color(0xFF1976D2))
         }
     }
 }

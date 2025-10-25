@@ -483,14 +483,12 @@ fun AlbumDetailContent(
             }
 
             // Back to catalog button
-            Button(
+            androidx.compose.material3.OutlinedButton(
                 onClick = onBackClick,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
-                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                    containerColor = Color.Transparent
-                )
+                border = BorderStroke(1.dp, Color(0xFF1976D2))
             ) {
                 Text("Volver al catálogo", color = Color(0xFF1976D2))
             }
