@@ -1,8 +1,12 @@
 package com.uniandes.vinylhub.di
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.uniandes.vinylhub.data.model.Album
 import com.uniandes.vinylhub.data.remote.AlbumService
 import com.uniandes.vinylhub.data.remote.ArtistService
 import com.uniandes.vinylhub.data.remote.CollectorService
+import com.uniandes.vinylhub.data.util.AlbumTypeAdapter
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -36,11 +40,19 @@ class NetworkModule {
     
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideGson(): Gson {
+        return GsonBuilder()
+            .registerTypeAdapter(Album::class.java, AlbumTypeAdapter())
+            .create()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
     

@@ -1,6 +1,7 @@
 package com.uniandes.vinylhub.data.model
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
@@ -35,7 +36,20 @@ data class Album(
     val tracksCount: Int = 0,
     val performersCount: Int = 0,
     val commentsCount: Int = 0
-)
+) {
+    // Estos campos se deserializan desde JSON pero no se persisten en Room
+    @Ignore
+    @SerializedName("tracks")
+    var tracks: List<Track> = emptyList()
+
+    @Ignore
+    @SerializedName("performers")
+    var performers: List<Performer> = emptyList()
+
+    @Ignore
+    @SerializedName("comments")
+    var comments: List<Comment> = emptyList()
+}
 
 data class Track(
     @SerializedName("id")

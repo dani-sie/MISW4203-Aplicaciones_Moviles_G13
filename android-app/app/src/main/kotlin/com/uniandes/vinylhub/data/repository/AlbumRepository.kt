@@ -2,16 +2,56 @@ package com.uniandes.vinylhub.data.repository
 
 import com.uniandes.vinylhub.data.local.AlbumDao
 import com.uniandes.vinylhub.data.model.Album
+import com.uniandes.vinylhub.data.model.Track
+import com.uniandes.vinylhub.data.model.Performer
+import com.uniandes.vinylhub.data.model.Comment
 import com.uniandes.vinylhub.data.remote.AlbumService
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.transformLatest
+import kotlinx.coroutines.flow.FlowCollector
 import javax.inject.Inject
 
 class AlbumRepository @Inject constructor(
     private val albumService: AlbumService,
     private val albumDao: AlbumDao
 ) {
-    
+    // Mantener una copia en memoria de los datos completos con tracks, performers y comments
+    private var albumsInMemory: Map<Int, Album> = emptyMap()
+    private var isInitialized = false
+
     fun getAllAlbums(): Flow<List<Album>> = albumDao.getAllAlbums()
+        .transformLatest { dbAlbums ->
+            // Si no está inicializado, cargar del API primero
+            if (!isInitialized) {
+                android.util.Log.d("AlbumRepository", "getAllAlbums: No inicializado, cargando del API...")
+                try {
+                    refreshAlbums()
+                } catch (e: Exception) {
+                    android.util.Log.e("AlbumRepository", "Error loading albums: ${e.message}")
+                }
+            }
+
+            // Enriquecer los datos de la BD con los datos en memoria
+            val enrichedAlbums = dbAlbums.map { dbAlbum ->
+                val albumInMemory = albumsInMemory[dbAlbum.id]
+                if (albumInMemory != null) {
+                    // Si existe en memoria, usar los datos completos
+                    albumInMemory
+                } else {
+                    // Si no existe en memoria, usar los datos de la BD
+                    dbAlbum
+                }
+            }
+
+            android.util.Log.d("AlbumRepository", "getAllAlbums: Emitiendo ${enrichedAlbums.size} álbumes")
+            enrichedAlbums.forEach { album ->
+                android.util.Log.d("AlbumRepository", "Album ${album.id}: tracks=${album.tracks.size}, performers=${album.performers.size}, comments=${album.comments.size}")
+            }
+
+            this@transformLatest.emit(enrichedAlbums)
+        }
     
     suspend fun getAlbumById(id: Int): Album? = albumDao.getAlbumById(id)
     
@@ -21,8 +61,8 @@ class AlbumRepository @Inject constructor(
             val albumsFromApi = albumService.getAllAlbums()
             android.util.Log.d("AlbumRepository", "Álbumes obtenidos del API: ${albumsFromApi.size}")
 
-            // Mapear los datos de la API al modelo de Room
-            val albumsToSave = albumsFromApi.map { apiAlbum ->
+            // Convertir a Album y guardar en memoria
+            val albumsWithData = albumsFromApi.map { apiAlbum ->
                 Album(
                     id = apiAlbum.id,
                     name = apiAlbum.name,
@@ -31,10 +71,39 @@ class AlbumRepository @Inject constructor(
                     releaseDate = apiAlbum.releaseDate,
                     genre = apiAlbum.genre,
                     recordLabel = apiAlbum.recordLabel,
-                    artists = apiAlbum.artists,
+                    artists = apiAlbum.artists ?: emptyList(),
                     tracksCount = apiAlbum.tracks?.size ?: 0,
                     performersCount = apiAlbum.performers?.size ?: 0,
                     commentsCount = apiAlbum.comments?.size ?: 0
+                ).apply {
+                    tracks = apiAlbum.tracks?.map { Track(it.id, it.name, it.duration) } ?: emptyList()
+                    performers = apiAlbum.performers?.map { Performer(it.id, it.name, it.image, it.description, it.birthDate, it.creationDate) } ?: emptyList()
+                    comments = apiAlbum.comments?.map { Comment(it.id, it.description, it.rating) } ?: emptyList()
+                }
+            }
+
+            // Guardar los datos completos en memoria
+            albumsInMemory = albumsWithData.associateBy { it.id }
+            isInitialized = true
+            android.util.Log.d("AlbumRepository", "Datos en memoria: ${albumsInMemory.size} álbumes")
+            albumsInMemory.forEach { (id, album) ->
+                android.util.Log.d("AlbumRepository", "Album $id: tracks=${album.tracks.size}, performers=${album.performers.size}, comments=${album.comments.size}")
+            }
+
+            // Mapear los datos de la API al modelo de Room (sin los datos complejos)
+            val albumsToSave = albumsWithData.map { album ->
+                Album(
+                    id = album.id,
+                    name = album.name,
+                    description = album.description,
+                    cover = album.cover,
+                    releaseDate = album.releaseDate,
+                    genre = album.genre,
+                    recordLabel = album.recordLabel,
+                    artists = album.artists,
+                    tracksCount = album.tracksCount,
+                    performersCount = album.performersCount,
+                    commentsCount = album.commentsCount
                 )
             }
             // Borrar todos los álbumes antiguos antes de insertar los nuevos
