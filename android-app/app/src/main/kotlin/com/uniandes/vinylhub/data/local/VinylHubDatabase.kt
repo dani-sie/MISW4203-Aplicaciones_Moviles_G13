@@ -11,7 +11,7 @@ import com.uniandes.vinylhub.data.model.Collector
 
 @Database(
     entities = [Album::class, Artist::class, Collector::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

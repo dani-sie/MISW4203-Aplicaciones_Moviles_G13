@@ -1,15 +1,54 @@
 package com.uniandes.vinylhub.data.remote
 
-import com.uniandes.vinylhub.data.model.Artist
+import com.google.gson.annotations.SerializedName
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ArtistService {
-    
-    @GET("artists")
-    suspend fun getAllArtists(): List<Artist>
-    
-    @GET("artists/{id}")
-    suspend fun getArtistById(@Path("id") id: Int): Artist
+
+    @GET("musicians")
+    suspend fun getAllArtists(): List<ArtistApiResponse>
+
+    @GET("musicians/{id}")
+    suspend fun getArtistById(@Path("id") id: Int): ArtistApiResponse
 }
+
+data class ArtistApiResponse(
+    @SerializedName("id")
+    val id: Int,
+
+    @SerializedName("name")
+    val name: String,
+
+    @SerializedName("birthDate")
+    val birthDate: String,
+
+    @SerializedName("image")
+    val image: String = "",
+
+    @SerializedName("description")
+    val description: String = "",
+
+    @SerializedName("albums")
+    val albums: List<ArtistAlbum>? = null,
+
+    @SerializedName("performerPrizes")
+    val performerPrizes: List<ArtistPrize>? = null
+)
+
+data class ArtistAlbum(
+    @SerializedName("id")
+    val id: Int,
+
+    @SerializedName("name")
+    val name: String
+)
+
+data class ArtistPrize(
+    @SerializedName("id")
+    val id: Int,
+
+    @SerializedName("premiationDate")
+    val premiationDate: String
+)
 

@@ -18,8 +18,10 @@ import androidx.navigation.navArgument
 import com.uniandes.vinylhub.presentation.navigation.NavRoutes
 import com.uniandes.vinylhub.presentation.ui.screens.AlbumDetailScreen
 import com.uniandes.vinylhub.presentation.ui.screens.AlbumListScreen
+import com.uniandes.vinylhub.presentation.ui.screens.ArtistListScreen
 import com.uniandes.vinylhub.presentation.ui.screens.HomeScreen
 import com.uniandes.vinylhub.presentation.viewmodel.AlbumViewModel
+import com.uniandes.vinylhub.presentation.viewmodel.ArtistViewModel
 import com.uniandes.vinylhub.ui.theme.VinylHubTheme
 import javax.inject.Inject
 
@@ -27,6 +29,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var albumViewModel: AlbumViewModel
+
+    @Inject
+    lateinit var artistViewModel: ArtistViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +45,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    VinylHubApp(albumViewModel)
+                    VinylHubApp(albumViewModel, artistViewModel)
                 }
             }
         }
@@ -48,7 +53,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun VinylHubApp(albumViewModel: AlbumViewModel) {
+fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel) {
     val navController = rememberNavController()
 
     NavHost(
@@ -59,6 +64,9 @@ fun VinylHubApp(albumViewModel: AlbumViewModel) {
             HomeScreen(
                 onNavigateToAlbums = {
                     navController.navigate(NavRoutes.AlbumList.route)
+                },
+                onNavigateToArtists = {
+                    navController.navigate(NavRoutes.ArtistList.route)
                 }
             )
         }
@@ -82,6 +90,14 @@ fun VinylHubApp(albumViewModel: AlbumViewModel) {
                 viewModel = albumViewModel,
                 onBackClick = {
                     navController.popBackStack()
+                }
+            )
+        }
+        composable(NavRoutes.ArtistList.route) {
+            ArtistListScreen(
+                viewModel = artistViewModel,
+                onArtistClick = { artistId ->
+                    navController.navigate(NavRoutes.ArtistDetail.createRoute(artistId))
                 }
             )
         }

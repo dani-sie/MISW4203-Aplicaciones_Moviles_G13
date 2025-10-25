@@ -14,6 +14,15 @@ data class Artist(
     val name: String,
 
     @SerializedName("birthDate")
-    val birthDate: String
+    val birthDate: String,
+
+    @SerializedName("image")
+    val image: String = "",
+
+    @SerializedName("description")
+    val description: String = "",
+
+    val albumsCount: Int = 0,
+    val prizesCount: Int = 0
 )
 
