@@ -1,5 +1,6 @@
 package com.uniandes.vinylhub.presentation.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -106,7 +107,7 @@ fun ArtistListItem(
             .fillMaxWidth()
             .padding(vertical = 12.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalAlignment = Alignment.Top
+        verticalAlignment = Alignment.CenterVertically
     ) {
         // Artist image - rectangular vertical with rounded corners
         Box(
@@ -136,9 +137,7 @@ fun ArtistListItem(
 
         // Artist info
         Column(
-            modifier = Modifier
-                .weight(1f)
-                .padding(top = 4.dp)
+            modifier = Modifier.weight(1f)
         ) {
             Text(
                 text = artist.name,
@@ -148,12 +147,28 @@ fun ArtistListItem(
                 overflow = TextOverflow.Ellipsis
             )
             Text(
-                text = "Nac.: ${artist.birthDate.substring(0, 10)} • ${artist.albumsCount} álbumes • ${artist.prizesCount} premio${if (artist.prizesCount != 1) "s" else ""}",
+                text = "Nac.: ${artist.birthDate.substring(0, 10)}",
                 fontSize = 12.sp,
                 color = androidx.compose.ui.graphics.Color(0xFF666666),
-                maxLines = Int.MAX_VALUE,
+                maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
+            // Badges row
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                ArtistBadgeChip(
+                    label = "${artist.albumsCount} álbum${if (artist.albumsCount != 1) "es" else ""}",
+                    backgroundColor = androidx.compose.ui.graphics.Color(0xFF2196F3)
+                )
+                ArtistBadgeChip(
+                    label = "${artist.prizesCount} premio${if (artist.prizesCount != 1) "s" else ""}",
+                    backgroundColor = androidx.compose.ui.graphics.Color(0xFFFFC107)
+                )
+            }
         }
 
         // Details button with gray border and text
@@ -164,6 +179,28 @@ fun ArtistListItem(
         ) {
             Text("Detalles", color = androidx.compose.ui.graphics.Color(0xFF9E9E9E))
         }
+    }
+}
+
+@Composable
+fun ArtistBadgeChip(
+    label: String,
+    backgroundColor: androidx.compose.ui.graphics.Color
+) {
+    Box(
+        modifier = Modifier
+            .background(
+                color = backgroundColor,
+                shape = RoundedCornerShape(16.dp)
+            )
+            .padding(horizontal = 12.dp, vertical = 3.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = label,
+            fontSize = 11.sp,
+            color = androidx.compose.ui.graphics.Color.White
+        )
     }
 }
 

@@ -18,7 +18,8 @@ import com.uniandes.vinylhub.ui.theme.VinylHubTheme
 @Composable
 fun HomeScreen(
     onNavigateToAlbums: () -> Unit,
-    onNavigateToArtists: () -> Unit = {}
+    onNavigateToArtists: () -> Unit = {},
+    onNavigateToCollectors: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -60,6 +61,13 @@ fun HomeScreen(
         ) {
             Text("Ver Listado de Artistas")
         }
+
+        Button(
+            onClick = onNavigateToCollectors,
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text("Ver Listado de Coleccionistas")
+        }
     }
 }
 
@@ -67,7 +75,7 @@ fun HomeScreen(
 @Composable
 fun HomeScreenPreview() {
     VinylHubTheme {
-        HomeScreen(onNavigateToAlbums = {}, onNavigateToArtists = {})
+        HomeScreen(onNavigateToAlbums = {}, onNavigateToArtists = {}, onNavigateToCollectors = {})
     }
 }
 

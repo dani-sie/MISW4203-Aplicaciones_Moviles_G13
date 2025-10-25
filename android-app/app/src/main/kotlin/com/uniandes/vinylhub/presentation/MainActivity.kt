@@ -19,9 +19,11 @@ import com.uniandes.vinylhub.presentation.navigation.NavRoutes
 import com.uniandes.vinylhub.presentation.ui.screens.AlbumDetailScreen
 import com.uniandes.vinylhub.presentation.ui.screens.AlbumListScreen
 import com.uniandes.vinylhub.presentation.ui.screens.ArtistListScreen
+import com.uniandes.vinylhub.presentation.ui.screens.CollectorListScreen
 import com.uniandes.vinylhub.presentation.ui.screens.HomeScreen
 import com.uniandes.vinylhub.presentation.viewmodel.AlbumViewModel
 import com.uniandes.vinylhub.presentation.viewmodel.ArtistViewModel
+import com.uniandes.vinylhub.presentation.viewmodel.CollectorViewModel
 import com.uniandes.vinylhub.ui.theme.VinylHubTheme
 import javax.inject.Inject
 
@@ -32,6 +34,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var artistViewModel: ArtistViewModel
+
+    @Inject
+    lateinit var collectorViewModel: CollectorViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +50,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    VinylHubApp(albumViewModel, artistViewModel)
+                    VinylHubApp(albumViewModel, artistViewModel, collectorViewModel)
                 }
             }
         }
@@ -53,7 +58,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel) {
+fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel, collectorViewModel: CollectorViewModel) {
     val navController = rememberNavController()
 
     NavHost(
@@ -67,6 +72,9 @@ fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel
                 },
                 onNavigateToArtists = {
                     navController.navigate(NavRoutes.ArtistList.route)
+                },
+                onNavigateToCollectors = {
+                    navController.navigate(NavRoutes.CollectorList.route)
                 }
             )
         }
@@ -98,6 +106,14 @@ fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel
                 viewModel = artistViewModel,
                 onArtistClick = { artistId ->
                     navController.navigate(NavRoutes.ArtistDetail.createRoute(artistId))
+                }
+            )
+        }
+        composable(NavRoutes.CollectorList.route) {
+            CollectorListScreen(
+                viewModel = collectorViewModel,
+                onCollectorClick = { collectorId ->
+                    navController.navigate(NavRoutes.CollectorDetail.createRoute(collectorId))
                 }
             )
         }
