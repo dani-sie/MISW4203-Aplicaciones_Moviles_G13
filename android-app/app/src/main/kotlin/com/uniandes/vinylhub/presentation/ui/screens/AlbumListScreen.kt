@@ -119,6 +119,9 @@ fun AlbumListScreen(
                         isExpanded = isExpanded,
                         onClick = {
                             expandedAlbumId.value = if (isExpanded) null else album.id
+                        },
+                        onImageClick = {
+                            onAlbumClick(album.id)
                         }
                     )
                 }
@@ -131,7 +134,8 @@ fun AlbumListScreen(
 fun AlbumListItem(
     album: Album,
     isExpanded: Boolean = false,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onImageClick: () -> Unit = {}
 ) {
     Card(
         modifier = Modifier
@@ -146,7 +150,8 @@ fun AlbumListItem(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(150.dp)
-                    .background(Color.LightGray),
+                    .background(Color.LightGray)
+                    .clickable { onImageClick() },
                 contentAlignment = Alignment.Center
             ) {
                 if (album.cover.isNotEmpty()) {

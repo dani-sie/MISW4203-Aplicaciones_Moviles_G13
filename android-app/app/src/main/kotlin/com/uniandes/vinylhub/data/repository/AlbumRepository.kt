@@ -11,8 +11,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.transformLatest
 import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class AlbumRepository @Inject constructor(
     private val albumService: AlbumService,
     private val albumDao: AlbumDao
@@ -53,7 +55,37 @@ class AlbumRepository @Inject constructor(
             this@transformLatest.emit(enrichedAlbums)
         }
     
-    suspend fun getAlbumById(id: Int): Album? = albumDao.getAlbumById(id)
+    suspend fun getAlbumById(id: Int): Album? {
+        try {
+            android.util.Log.d("AlbumRepository", "Obteniendo álbum $id del API...")
+            val apiAlbum = albumService.getAlbumById(id)
+
+            // Convertir a Album con datos completos
+            val album = Album(
+                id = apiAlbum.id,
+                name = apiAlbum.name,
+                description = apiAlbum.description,
+                cover = apiAlbum.cover,
+                releaseDate = apiAlbum.releaseDate,
+                genre = apiAlbum.genre,
+                recordLabel = apiAlbum.recordLabel,
+                artists = apiAlbum.artists ?: emptyList(),
+                tracksCount = apiAlbum.tracks?.size ?: 0,
+                performersCount = apiAlbum.performers?.size ?: 0,
+                commentsCount = apiAlbum.comments?.size ?: 0
+            ).apply {
+                tracks = apiAlbum.tracks?.map { Track(it.id, it.name, it.duration) } ?: emptyList()
+                performers = apiAlbum.performers?.map { Performer(it.id, it.name, it.image, it.description, it.birthDate, it.creationDate) } ?: emptyList()
+                comments = apiAlbum.comments?.map { Comment(it.id, it.description, it.rating) } ?: emptyList()
+            }
+
+            android.util.Log.d("AlbumRepository", "Álbum $id obtenido: tracks=${album.tracks.size}, performers=${album.performers.size}, comments=${album.comments.size}")
+            return album
+        } catch (e: Exception) {
+            android.util.Log.e("AlbumRepository", "Error obteniendo álbum $id: ${e.message}")
+            return null
+        }
+    }
     
     suspend fun refreshAlbums() {
         try {

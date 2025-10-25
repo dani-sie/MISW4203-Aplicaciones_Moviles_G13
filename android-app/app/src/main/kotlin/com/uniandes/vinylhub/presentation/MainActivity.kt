@@ -13,7 +13,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.uniandes.vinylhub.VinylHubApplication
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import com.uniandes.vinylhub.presentation.navigation.NavRoutes
+import com.uniandes.vinylhub.presentation.ui.screens.AlbumDetailScreen
 import com.uniandes.vinylhub.presentation.ui.screens.AlbumListScreen
 import com.uniandes.vinylhub.presentation.ui.screens.HomeScreen
 import com.uniandes.vinylhub.presentation.viewmodel.AlbumViewModel
@@ -64,6 +67,21 @@ fun VinylHubApp(albumViewModel: AlbumViewModel) {
                 viewModel = albumViewModel,
                 onAlbumClick = { albumId ->
                     navController.navigate(NavRoutes.AlbumDetail.createRoute(albumId))
+                }
+            )
+        }
+        composable(
+            NavRoutes.AlbumDetail.route,
+            arguments = listOf(
+                navArgument("albumId") { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+            val albumId = backStackEntry.arguments?.getInt("albumId") ?: return@composable
+            AlbumDetailScreen(
+                albumId = albumId,
+                viewModel = albumViewModel,
+                onBackClick = {
+                    navController.popBackStack()
                 }
             )
         }
