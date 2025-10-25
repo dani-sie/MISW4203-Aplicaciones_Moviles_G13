@@ -42,7 +42,44 @@ class ArtistRepository @Inject constructor(
             emit(enrichedArtists)
         }
 
-    suspend fun getArtistById(id: Int): Artist? = artistDao.getArtistById(id)
+    suspend fun getArtistById(id: Int): Artist? {
+        try {
+            Log.d("ArtistRepository", "Obteniendo artista $id del API...")
+            val apiArtist = artistService.getArtistById(id)
+
+            // Convertir a Artist con datos completos
+            val artist = Artist(
+                id = apiArtist.id,
+                name = apiArtist.name,
+                birthDate = apiArtist.birthDate,
+                image = apiArtist.image,
+                description = apiArtist.description,
+                albumsCount = apiArtist.albums?.size ?: 0,
+                prizesCount = apiArtist.performerPrizes?.size ?: 0
+            ).apply {
+                albums = apiArtist.albums?.map {
+                    com.uniandes.vinylhub.data.model.ArtistAlbum(
+                        it.id,
+                        it.name,
+                        it.cover ?: "",
+                        it.releaseDate ?: "",
+                        it.description ?: "",
+                        it.genre ?: "",
+                        it.recordLabel ?: ""
+                    )
+                } ?: emptyList()
+                performerPrizes = apiArtist.performerPrizes?.map {
+                    com.uniandes.vinylhub.data.model.ArtistPrize(it.id, it.premiationDate)
+                } ?: emptyList()
+            }
+
+            Log.d("ArtistRepository", "Artista $id obtenido: albums=${artist.albums.size}, prizes=${artist.performerPrizes.size}")
+            return artist
+        } catch (e: Exception) {
+            Log.e("ArtistRepository", "Error obteniendo artista $id: ${e.message}")
+            return null
+        }
+    }
 
     suspend fun refreshArtists() {
         try {
