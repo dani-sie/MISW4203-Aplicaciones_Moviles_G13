@@ -9,11 +9,11 @@
 
 | Categoría | Puntos Totales | Completados | Faltantes | % Progreso |
 |-----------|----------------|-------------|-----------|------------|
-| **Prácticas Ágiles** | 15 | 7 | 8 | 47% |
+| **Prácticas Ágiles** | 15 | 11 | 4 | 73% |
 | **Documentación** | 5 | 5 | 0 | 100% |
 | **Diseño y Construcción** | 40 | 40 | 0 | 100% |
 | **Calidad** | 40 | 40 | 0 | 100% |
-| **TOTAL** | **100** | **92** | **8** | **92%** |
+| **TOTAL** | **100** | **96** | **4** | **96%** |
 
 ---
 
@@ -26,15 +26,17 @@
 ### ✅ APK disponible en el repositorio (2 puntos)
 - [x] APK copiado a la carpeta `/releases`
 - [x] APK renombrado a `vinilos-v1.0.0.apk`
-- [x] README creado en `/releases` con información del APK
-- [ ] APK incluido en el commit y pusheado (pendiente)
-- **Completado**: APK listo en `releases/vinilos-v1.0.0.apk` (12 MB)
+- [x] .gitignore modificado para incluir APKs de releases/
+- [x] README principal actualizado con link al APK
+- [x] APK incluido en el commit
+- **Completado**: APK en `releases/vinilos-v1.0.0.apk` (12 MB)
 
 ### ⏳ Release etiquetado (2 puntos)
 - [ ] Tag de release creado (ej: `v1.0.0`)
 - [ ] Tag pusheado al repositorio remoto
 - [ ] Release publicado en GitHub con notas
-- **Acción**: Crear tag después de commitear el APK
+- **Acción**: `git tag -a v1.0.0 -m "Release v1.0.0 - Iteración 1"`
+- **Acción**: `git push origin v1.0.0`
 
 ### ⚠️ GitFlow implementado (2 puntos)
 - [x] Rama `main` existe
@@ -43,11 +45,11 @@
 - [ ] Código del release en rama `main`
 - **Acción**: Verificar PRs en GitHub y documentar
 
-### ❌ Evidencia de reuniones semana 3 y 4 (4 puntos)
+### ✅ Evidencia de reuniones semana 3 y 4 (4 puntos)
 - [x] Acta de reunión semana 2 (19/oct/2025)
-- [ ] Acta de reunión semana 3
-- [ ] Acta de reunión semana 4
-- **Acción**: Crear actas en `/docs/actas/`
+- [x] Acta de reunión semana 3 (20/oct/2025)
+- [x] Acta de reunión semana 4 (25/oct/2025)
+- **Completado**: `Acta_Reunion_Semana_3.md` y `Acta_Reunion_Semana_4.md`
 
 ### ❌ Retrospectiva del Inception (3 puntos)
 - [ ] Documento de retrospectiva creado
@@ -180,7 +182,7 @@
 
 ## 🎯 PLAN DE ACCIÓN PRIORIZADO
 
-### ✅ COMPLETADO (45 puntos)
+### ✅ COMPLETADO (51 puntos)
 1. **Crear y ejecutar pruebas E2E con Espresso** → 15 puntos ✅
    - [x] Implementar pruebas para HU01-HU06 (16 pruebas)
    - [x] Ejecutar pruebas en emulador (17/17 exitosas)
@@ -206,16 +208,22 @@
    - [x] Diagrama de componentes (Mermaid)
    - [x] README con índice de diagramas
 
-### 🟡 PRIORIDAD MEDIA (10 puntos)
-6. **Gestión de releases** → 4 puntos
-   - [ ] Copiar APK al repositorio (existe en build/outputs/)
-   - [ ] Crear tag de release
+6. **Gestión de APK** → 2 puntos ✅
+   - [x] Copiar APK al repositorio
+   - [x] Modificar .gitignore
+   - [x] Actualizar README con link al APK
 
-7. **Actas de reunión semana 3 y 4** → 4 puntos
-   - [ ] Crear acta semana 3
-   - [ ] Crear acta semana 4
+7. **Actas de reunión semana 3 y 4** → 4 puntos ✅
+   - [x] Crear acta semana 3
+   - [x] Crear acta semana 4
 
-8. **Retrospectiva Inception** → 3 puntos
+### 🟡 PRIORIDAD BAJA (4 puntos)
+8. **Crear tag de release** → 2 puntos
+   - [ ] Crear tag `v1.0.0`
+   - [ ] Push del tag
+   - [ ] Publicar release en GitHub
+
+9. **Retrospectiva Inception** → 3 puntos
    - [ ] Crear documento de retrospectiva
 
 ---
@@ -230,21 +238,24 @@
 - ✅ Navegación completa entre pantallas
 - ✅ UI/UX bien diseñada
 - ✅ **16 pruebas E2E implementadas y ejecutadas (100% exitosas)**
-- ✅ **Estrategia de pruebas documentada**
+- ✅ **Estrategia de pruebas documentada y en Wiki**
 - ✅ **App sin crashes en Android L+**
+- ✅ **Diagramas arquitectónicos completos (Mermaid)**
+- ✅ **README completo con instrucciones**
+- ✅ **APK disponible en repositorio**
 
 ### Áreas de mejora:
-- ❌ Falta documentación técnica (diagramas arquitectónicos)
-- ❌ README incompleto para construcción local
-- ❌ Falta copiar documentación a Wiki
-- ❌ Falta gestión de releases (APK y tags)
+- ⏳ Falta crear tag de release (2 puntos)
+- ⏳ Falta documentación de proceso (actas y retrospectiva) (7 puntos)
 
 ### Próximos pasos inmediatos:
 1. ✅ ~~Crear pruebas E2E~~ **COMPLETADO**
 2. ✅ ~~Documentar estrategia de pruebas~~ **COMPLETADO**
-3. ⏳ Copiar documentación a Wiki (3 puntos)
-4. ⏳ Crear diagramas UML (7 puntos)
-5. ⏳ Completar README (5 puntos)
+3. ✅ ~~Crear diagramas UML~~ **COMPLETADO**
+4. ✅ ~~Completar README~~ **COMPLETADO**
+5. ✅ ~~Subir APK~~ **COMPLETADO**
+6. ⏳ Crear tag de release (2 puntos)
+7. ⏳ Documentación de proceso (7 puntos)
 
 ---
 
