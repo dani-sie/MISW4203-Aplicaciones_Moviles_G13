@@ -91,8 +91,40 @@ Toda la documentación del proyecto está centralizada en la Wiki del repositori
 - [🏁 Sprint 1](https://github.com/dani-sie/MISW4203-Aplicaciones_Moviles_G13/wiki/Sprint-1)
 - [⚙️ Sprint 2](https://github.com/dani-sie/MISW4203-Aplicaciones_Moviles_G13/wiki/Sprint-2)
 - [🚀 Sprint 3](https://github.com/dani-sie/MISW4203-Aplicaciones_Moviles_G13/wiki/Sprint-3)
+- [🧪 Estrategia de pruebas](https://github.com/dani-sie/MISW4203-Aplicaciones_Moviles_G13/wiki/Estrateg%C3%ADa-de-pruebas)
+- [📐 Diagramas arquitectónicos](./docs/diagrams/)
 - [🗓️ Actas de reunión](https://github.com/dani-sie/MISW4203-Aplicaciones_Moviles_G13/wiki#🗓️-actas-de-reunión-del-equipo)
 - [🧭 Backlog de producto](https://github.com/dani-sie/MISW4203-Aplicaciones_Moviles_G13/wiki#🧾-backlog-de-producto)
+
+---
+
+## 🚀 Construcción Local
+
+### **Requisitos**
+- Android Studio Hedgehog o superior
+- JDK 17+
+- Android SDK (API 21+)
+
+### **Clonar y Compilar**
+```bash
+# Clonar repositorio
+git clone https://github.com/dani-sie/MISW4203-Aplicaciones_Moviles_G13.git
+cd MISW4203-Aplicaciones_Moviles_G13/android-app
+
+# Compilar
+./gradlew assembleDebug
+```
+
+### **Ejecutar App**
+1. Abrir `android-app/` en Android Studio
+2. Conectar dispositivo o iniciar emulador (API 21+)
+3. Click en **Run** ▶️
+
+### **Ejecutar Pruebas E2E**
+```bash
+cd android-app
+./gradlew connectedAndroidTest
+```
 
 ---
 
@@ -104,6 +136,7 @@ Toda la documentación del proyecto está centralizada en la Wiki del repositori
 | Milestones | ✅ Definidos (3 sprints) | 19/oct/2025 |
 | Wiki por sprint | ✅ Publicada | 19/oct/2025 |
 | Prototipo Figma | ✅ Navegable | 19/oct/2025 |
+| Pruebas E2E | ✅ 17/17 pasando (100%) | 25/oct/2025 |
 | Acta de reunión | ✅ Documentada | [Ver](./docs/actas/2025-10-19.md) |
 
 ---
