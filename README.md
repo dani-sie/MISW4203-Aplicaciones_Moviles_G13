@@ -98,6 +98,17 @@ Toda la documentación del proyecto está centralizada en la Wiki del repositori
 
 ---
 
+## 📦 Descargar APK
+
+**Versión actual**: [v1.0.0](./releases/vinilos-v1.0.0.apk) (12 MB)
+
+- **Min SDK**: Android 5.0 (API 21)
+- **Funcionalidades**: HU01-HU06 (Álbumes, Artistas, Coleccionistas)
+- **Calidad**: 17/17 pruebas E2E pasando (100%)
+
+
+---
+
 ## 🚀 Construcción Local
 
 ### **Requisitos**

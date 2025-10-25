@@ -49,6 +49,9 @@ captures/
 *.ap_
 *.aab
 
+# Exception: Allow APKs in releases folder
+!releases/*.apk
+
 # Files for the ART/Dalvik VM
 *.dex
 

@@ -9,11 +9,11 @@
 
 | Categoría | Puntos Totales | Completados | Faltantes | % Progreso |
 |-----------|----------------|-------------|-----------|------------|
-| **Prácticas Ágiles** | 15 | 5 | 10 | 33% |
+| **Prácticas Ágiles** | 15 | 7 | 8 | 47% |
 | **Documentación** | 5 | 5 | 0 | 100% |
 | **Diseño y Construcción** | 40 | 40 | 0 | 100% |
 | **Calidad** | 40 | 40 | 0 | 100% |
-| **TOTAL** | **100** | **90** | **10** | **90%** |
+| **TOTAL** | **100** | **92** | **8** | **92%** |
 
 ---
 
@@ -23,17 +23,18 @@
 - [x] El equipo Uniandes puede acceder al repositorio
 - [x] Repositorio público o con permisos adecuados
 
-### ❌ APK disponible en el repositorio (2 puntos)
-- [ ] APK copiado a la raíz del repositorio (o carpeta `/releases`)
-- [ ] APK incluido en el commit y pusheado
-- **Archivo actual**: `android-app/app/build/outputs/apk/debug/app-debug.apk` (12.5 MB)
-- **Acción**: Copiar a `/releases/vinilos-v1.0.0.apk`
+### ✅ APK disponible en el repositorio (2 puntos)
+- [x] APK copiado a la carpeta `/releases`
+- [x] APK renombrado a `vinilos-v1.0.0.apk`
+- [x] README creado en `/releases` con información del APK
+- [ ] APK incluido en el commit y pusheado (pendiente)
+- **Completado**: APK listo en `releases/vinilos-v1.0.0.apk` (12 MB)
 
-### ❌ Release etiquetado (2 puntos)
-- [ ] Tag de release creado (ej: `v1.0.0` o `release-iteration-1`)
+### ⏳ Release etiquetado (2 puntos)
+- [ ] Tag de release creado (ej: `v1.0.0`)
 - [ ] Tag pusheado al repositorio remoto
 - [ ] Release publicado en GitHub con notas
-- **Acción**: `git tag -a v1.0.0 -m "Release Iteración 1"`
+- **Acción**: Crear tag después de commitear el APK
 
 ### ⚠️ GitFlow implementado (2 puntos)
 - [x] Rama `main` existe
