@@ -132,6 +132,21 @@ fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel
                 }
             )
         }
+        composable(
+            NavRoutes.CollectorDetail.route,
+            arguments = listOf(
+                navArgument("collectorId") { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+            val collectorId = backStackEntry.arguments?.getInt("collectorId") ?: return@composable
+            com.uniandes.vinylhub.presentation.ui.screens.CollectorDetailScreen(
+                collectorId = collectorId,
+                viewModel = collectorViewModel,
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
+        }
     }
 }
 

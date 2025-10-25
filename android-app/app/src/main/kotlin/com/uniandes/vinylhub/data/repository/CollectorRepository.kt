@@ -32,7 +32,34 @@ class CollectorRepository @Inject constructor(
             emit(enrichedCollectors)
         }
 
-    suspend fun getCollectorById(id: Int): Collector? = collectorDao.getCollectorById(id)
+    suspend fun getCollectorById(id: Int): Collector? {
+        try {
+            Log.d("CollectorRepository", "Obteniendo coleccionista $id del API...")
+            val apiCollector = collectorService.getCollectorById(id)
+
+            // Convertir a Collector con datos completos
+            val collector = Collector(
+                id = apiCollector.id,
+                name = apiCollector.name ?: "",
+                telephone = apiCollector.telephone ?: "",
+                email = apiCollector.email ?: "",
+                image = apiCollector.image,
+                commentsCount = apiCollector.comments?.size ?: 0,
+                favoritesCount = apiCollector.favoritePerformers?.size ?: 0,
+                albumsCount = apiCollector.collectorAlbums?.size ?: 0
+            ).apply {
+                comments = apiCollector.comments ?: emptyList()
+                favoritePerformers = apiCollector.favoritePerformers ?: emptyList()
+                collectorAlbums = apiCollector.collectorAlbums ?: emptyList()
+            }
+
+            Log.d("CollectorRepository", "Coleccionista $id obtenido: comments=${collector.comments.size}, favorites=${collector.favoritePerformers.size}, albums=${collector.collectorAlbums.size}")
+            return collector
+        } catch (e: Exception) {
+            Log.e("CollectorRepository", "Error obteniendo coleccionista $id: ${e.message}", e)
+            return null
+        }
+    }
 
     suspend fun refreshCollectors() {
         try {
@@ -40,17 +67,17 @@ class CollectorRepository @Inject constructor(
             val collectors = apiCollectors.map { apiCollector ->
                 Collector(
                     id = apiCollector.id,
-                    name = apiCollector.name,
-                    telephone = apiCollector.telephone,
-                    email = apiCollector.email,
+                    name = apiCollector.name ?: "",
+                    telephone = apiCollector.telephone ?: "",
+                    email = apiCollector.email ?: "",
                     image = apiCollector.image,
-                    commentsCount = apiCollector.comments.size,
-                    favoritesCount = apiCollector.favoritePerformers.size,
-                    albumsCount = apiCollector.collectorAlbums.size
+                    commentsCount = apiCollector.comments?.size ?: 0,
+                    favoritesCount = apiCollector.favoritePerformers?.size ?: 0,
+                    albumsCount = apiCollector.collectorAlbums?.size ?: 0
                 ).apply {
-                    comments = apiCollector.comments
-                    favoritePerformers = apiCollector.favoritePerformers
-                    collectorAlbums = apiCollector.collectorAlbums
+                    comments = apiCollector.comments ?: emptyList()
+                    favoritePerformers = apiCollector.favoritePerformers ?: emptyList()
+                    collectorAlbums = apiCollector.collectorAlbums ?: emptyList()
                 }
             }
             collectorsInMemory = collectors.associateBy { it.id }

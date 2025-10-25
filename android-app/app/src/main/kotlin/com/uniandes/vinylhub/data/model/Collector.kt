@@ -12,13 +12,13 @@ data class Collector(
     val id: Int,
 
     @SerializedName("name")
-    val name: String,
+    val name: String = "",
 
     @SerializedName("telephone")
-    val telephone: String,
+    val telephone: String = "",
 
     @SerializedName("email")
-    val email: String,
+    val email: String = "",
 
     @SerializedName("image")
     val image: String? = null,
@@ -44,26 +44,41 @@ data class CollectorComment(
     @SerializedName("id")
     val id: Int,
     @SerializedName("description")
-    val description: String,
+    val description: String = "",
     @SerializedName("rating")
-    val rating: Int
+    val rating: Int = 0
 )
 
 data class FavoritePerformer(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
-    val name: String,
+    val name: String? = null,
     @SerializedName("image")
-    val image: String = ""
-)
+    val image: String? = null,
+    @SerializedName("description")
+    val description: String? = null,
+    @SerializedName("birthDate")
+    val birthDate: String? = null,
+    @SerializedName("creationDate")
+    val creationDate: String? = null
+) {
+    // Helper para obtener la fecha (birthDate para artistas, creationDate para bandas)
+    fun getDate(): String {
+        return when {
+            !birthDate.isNullOrEmpty() -> birthDate
+            !creationDate.isNullOrEmpty() -> creationDate
+            else -> ""
+        }
+    }
+}
 
 data class CollectorAlbum(
     @SerializedName("id")
     val id: Int,
     @SerializedName("price")
-    val price: Int,
+    val price: Int = 0,
     @SerializedName("status")
-    val status: String
+    val status: String = ""
 )
 

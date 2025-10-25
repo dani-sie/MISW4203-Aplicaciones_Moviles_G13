@@ -376,7 +376,7 @@ fun ArtistDetailContent(
                 ),
                 border = BorderStroke(1.dp, Color(0xFF1976D2))
             ) {
-                Text("Volver al catálogo")
+                Text("Volver a artistas")
             }
         }
     }
