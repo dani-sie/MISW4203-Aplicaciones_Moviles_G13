@@ -9,11 +9,11 @@
 
 | Categoría | Puntos Totales | Completados | Faltantes | % Progreso |
 |-----------|----------------|-------------|-----------|------------|
-| **Prácticas Ágiles** | 15 | 11 | 4 | 73% |
+| **Prácticas Ágiles** | 15 | 14 | 1 | 93% |
 | **Documentación** | 5 | 5 | 0 | 100% |
 | **Diseño y Construcción** | 40 | 40 | 0 | 100% |
 | **Calidad** | 40 | 40 | 0 | 100% |
-| **TOTAL** | **100** | **96** | **4** | **96%** |
+| **TOTAL** | **100** | **99** | **1** | **99%** |
 
 ---
 
@@ -51,11 +51,11 @@
 - [x] Acta de reunión semana 4 (25/oct/2025)
 - **Completado**: `Acta_Reunion_Semana_3.md` y `Acta_Reunion_Semana_4.md`
 
-### ❌ Retrospectiva del Inception (3 puntos)
-- [ ] Documento de retrospectiva creado
-- [ ] Incluye: qué salió bien, qué mejorar, acciones de mejora
-- [ ] Publicado en Wiki o `/docs/`
-- **Acción**: Crear `docs/retrospectiva-inception.md`
+### ✅ Retrospectiva del Inception (3 puntos)
+- [x] Documento de retrospectiva creado
+- [x] Incluye: qué salió bien, qué mejorar, acciones de mejora
+- [x] Publicado en `/docs/`
+- **Completado**: `docs/retrospectiva-iteracion1.md`
 
 ---
 
