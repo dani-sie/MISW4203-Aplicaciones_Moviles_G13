@@ -95,6 +95,7 @@ Toda la documentación del proyecto está centralizada en la Wiki del repositori
 - [📐 Diagramas arquitectónicos](./docs/diagrams/)
 - [🗓️ Actas de reunión](https://github.com/dani-sie/MISW4203-Aplicaciones_Moviles_G13/wiki#🗓️-actas-de-reunión-del-equipo)
 - [🧭 Backlog de producto](https://github.com/dani-sie/MISW4203-Aplicaciones_Moviles_G13/wiki#🧾-backlog-de-producto)
+- [🍥 Retrospectiva](https://github.com/dani-sie/MISW4203-Aplicaciones_Moviles_G13/wiki/Retrospectiva-Iteraci%C3%B3n-1)
 
 ---
 
