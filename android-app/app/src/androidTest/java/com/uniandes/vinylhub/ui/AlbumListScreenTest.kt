@@ -7,6 +7,7 @@ import com.uniandes.vinylhub.presentation.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import com.uniandes.vinylhub.ui.TestConstants.*
 
 /**
  * Pruebas E2E para HU01: Consultar catálogo de álbumes
@@ -28,14 +29,14 @@ class AlbumListScreenTest {
         composeTestRule.onNodeWithText("🎵 VinylHub").assertIsDisplayed()
         
         // Act: Hacer clic en el botón de álbumes
-        composeTestRule.onNodeWithText("Ver Catálogo de Álbumes").performClick()
+        composeTestRule.onNodeWithText(NAV_ALBUMS).performClick()
         
         // Assert: Verificar que se muestra la pantalla de catálogo
         composeTestRule.waitUntil(timeoutMillis = 5000) {
-            composeTestRule.onAllNodesWithText("🎵 Catálogo")
+            composeTestRule.onAllNodesWithText(TITLE_CATALOG)
                 .fetchSemanticsNodes().isNotEmpty()
         }
-        composeTestRule.onNodeWithText("🎵 Catálogo").assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_CATALOG).assertIsDisplayed()
     }
 
     /**
@@ -45,14 +46,14 @@ class AlbumListScreenTest {
     @Test
     fun testAlbumListLoadsFromAPI() {
         // Arrange: Navegar a la lista de álbumes
-        composeTestRule.onNodeWithText("Ver Catálogo de Álbumes").performClick()
+        composeTestRule.onNodeWithText(NAV_ALBUMS).performClick()
         
         // Act: Esperar a que se carguen los álbumes
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             // Buscar cualquier texto que indique que hay álbumes cargados
             // Como los nombres de álbumes son dinámicos, buscamos elementos comunes
             try {
-                composeTestRule.onAllNodesWithText("Cargando álbumes...")
+                composeTestRule.onAllNodesWithText(LOADING_ALBUMS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -64,7 +65,7 @@ class AlbumListScreenTest {
         Thread.sleep(2000) // Dar tiempo para que se rendericen los álbumes
         
         // Verificar que la pantalla de catálogo está visible
-        composeTestRule.onNodeWithText("🎵 Catálogo").assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_CATALOG).assertIsDisplayed()
     }
 
     /**
@@ -74,11 +75,11 @@ class AlbumListScreenTest {
     @Test
     fun testAlbumExpansionInList() {
         // Arrange: Navegar a la lista de álbumes y esperar carga
-        composeTestRule.onNodeWithText("Ver Catálogo de Álbumes").performClick()
+        composeTestRule.onNodeWithText(NAV_ALBUMS).performClick()
         
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             try {
-                composeTestRule.onAllNodesWithText("Cargando álbumes...")
+                composeTestRule.onAllNodesWithText(LOADING_ALBUMS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -97,7 +98,7 @@ class AlbumListScreenTest {
         
         // Assert: Verificar que seguimos en la pantalla de catálogo
         // (la expansión ocurre en la misma pantalla)
-        composeTestRule.onNodeWithText("🎵 Catálogo").assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_CATALOG).assertIsDisplayed()
     }
 }
 

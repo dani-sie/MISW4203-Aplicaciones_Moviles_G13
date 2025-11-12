@@ -36,12 +36,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.uniandes.vinylhub.R
 import com.uniandes.vinylhub.data.model.Artist
 import com.uniandes.vinylhub.data.model.ArtistAlbum
 import com.uniandes.vinylhub.data.model.ArtistPrize
@@ -55,6 +57,7 @@ fun ArtistDetailScreen(
     onBackClick: () -> Unit,
     onAlbumClick: (Int) -> Unit = {}
 ) {
+    val context = LocalContext.current
     val artist = remember { mutableStateOf<Artist?>(null) }
     val isLoading = remember { mutableStateOf(true) }
     val error = remember { mutableStateOf<String?>(null) }
@@ -79,12 +82,12 @@ fun ArtistDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Artista") },
+                title = { Text(context.getString(R.string.title_artist)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Volver"
+                            contentDescription = context.getString(R.string.button_back)
                         )
                     }
                 }
@@ -462,12 +465,12 @@ fun ArtistDetailScreenPreview() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Artista") },
+                title = { Text("Artista") }, // Preview: usar string hardcodeado
                 navigationIcon = {
                     IconButton(onClick = {}) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Volver"
+                            contentDescription = "Volver" // Preview: usar string hardcodeado
                         )
                     }
                 }

@@ -7,6 +7,7 @@ import com.uniandes.vinylhub.presentation.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import com.uniandes.vinylhub.ui.TestConstants.*
 
 /**
  * Pruebas E2E para HU05: Consultar listado de coleccionistas
@@ -28,14 +29,14 @@ class CollectorListScreenTest {
         composeTestRule.onNodeWithText("🎵 VinylHub").assertIsDisplayed()
         
         // Act: Hacer clic en el botón de coleccionistas
-        composeTestRule.onNodeWithText("Ver Listado de Coleccionistas").performClick()
+        composeTestRule.onNodeWithText(NAV_COLLECTORS).performClick()
         
         // Assert: Verificar que se muestra la pantalla de coleccionistas
         composeTestRule.waitUntil(timeoutMillis = 5000) {
-            composeTestRule.onAllNodesWithText("👥 Coleccionistas")
+            composeTestRule.onAllNodesWithText(TITLE_COLLECTORS)
                 .fetchSemanticsNodes().isNotEmpty()
         }
-        composeTestRule.onNodeWithText("👥 Coleccionistas").assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_COLLECTORS).assertIsDisplayed()
     }
 
     /**
@@ -45,12 +46,12 @@ class CollectorListScreenTest {
     @Test
     fun testCollectorListLoadsFromAPI() {
         // Arrange: Navegar a la lista de coleccionistas
-        composeTestRule.onNodeWithText("Ver Listado de Coleccionistas").performClick()
+        composeTestRule.onNodeWithText(NAV_COLLECTORS).performClick()
         
         // Act: Esperar a que se carguen los coleccionistas
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             try {
-                composeTestRule.onAllNodesWithText("Cargando coleccionistas...")
+                composeTestRule.onAllNodesWithText(LOADING_COLLECTORS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -60,7 +61,7 @@ class CollectorListScreenTest {
         Thread.sleep(2000) // Dar tiempo para que se rendericen los coleccionistas
         
         // Assert: Verificar que no se muestra el mensaje de carga
-        composeTestRule.onNodeWithText("👥 Coleccionistas").assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_COLLECTORS).assertIsDisplayed()
         
         // Verificar que hay un campo de búsqueda
         composeTestRule.onNodeWithText("Buscar usuario").assertIsDisplayed()

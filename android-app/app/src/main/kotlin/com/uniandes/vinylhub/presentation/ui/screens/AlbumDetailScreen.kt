@@ -37,12 +37,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.uniandes.vinylhub.R
 import com.uniandes.vinylhub.data.model.Album
 import com.uniandes.vinylhub.data.model.Comment
 import com.uniandes.vinylhub.data.model.Performer
@@ -56,6 +58,7 @@ fun AlbumDetailScreen(
     viewModel: AlbumViewModel?,
     onBackClick: () -> Unit
 ) {
+    val context = LocalContext.current
     val album = remember { mutableStateOf<Album?>(null) }
     val isLoading = remember { mutableStateOf(true) }
     val error = remember { mutableStateOf<String?>(null) }
@@ -80,12 +83,12 @@ fun AlbumDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Álbum") },
+                title = { Text(context.getString(R.string.title_album)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Volver"
+                            contentDescription = context.getString(R.string.button_back)
                         )
                     }
                 }
@@ -152,14 +155,14 @@ fun AlbumDetailContent(
                 if (album.cover.isNotEmpty()) {
                     AsyncImage(
                         model = album.cover,
-                        contentDescription = "Cover de ${album.name}",
+                        contentDescription = "${context.getString(R.string.content_desc_cover_prefix)} ${album.name}",
                         modifier = Modifier
                             .size(100.dp)
                             .clip(RoundedCornerShape(8.dp)),
                         contentScale = ContentScale.Crop
                     )
                 } else {
-                    Text("Sin imagen")
+                    Text(context.getString(R.string.content_desc_no_image))
                 }
             }
 
@@ -374,7 +377,7 @@ fun AlbumDetailContent(
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Person,
-                                    contentDescription = "Sin imagen",
+                                    contentDescription = context.getString(R.string.content_desc_no_image),
                                     tint = Color.White,
                                     modifier = Modifier.size(32.dp)
                                 )
@@ -553,12 +556,12 @@ fun AlbumDetailScreenPreview() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Álbum") },
+                title = { Text("Álbum") }, // Preview: usar string hardcodeado
                 navigationIcon = {
                     IconButton(onClick = {}) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Volver"
+                            contentDescription = "Volver" // Preview: usar string hardcodeado
                         )
                     }
                 }

@@ -42,12 +42,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.uniandes.vinylhub.R
 import com.uniandes.vinylhub.data.model.Album
 import com.uniandes.vinylhub.presentation.viewmodel.AlbumViewModel
 
@@ -57,6 +59,7 @@ fun AlbumListScreen(
     onAlbumClick: (Int) -> Unit,
     onBackToHome: () -> Unit = {}
 ) {
+    val context = LocalContext.current
     val albums by if (viewModel != null) {
         viewModel.albums.collectAsState(initial = emptyList())
     } else {
@@ -74,7 +77,7 @@ fun AlbumListScreen(
     ) {
         // Header
         Text(
-            text = "🎵 Catálogo",
+            text = context.getString(R.string.title_catalog),
             fontSize = 20.sp,
             modifier = Modifier.padding(bottom = 12.dp)
         )
@@ -104,7 +107,7 @@ fun AlbumListScreen(
                 ) {
                     CircularProgressIndicator()
                     Text(
-                        text = "Cargando álbumes...",
+                        text = context.getString(R.string.loading_albums),
                         modifier = Modifier.padding(top = 16.dp)
                     )
                 }
@@ -137,7 +140,7 @@ fun AlbumListScreen(
                 .padding(top = 16.dp),
             border = androidx.compose.foundation.BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF1976D2))
         ) {
-            androidx.compose.material3.Text("Volver al menú principal", color = androidx.compose.ui.graphics.Color(0xFF1976D2))
+            androidx.compose.material3.Text(context.getString(R.string.button_back), color = androidx.compose.ui.graphics.Color(0xFF1976D2))
         }
     }
 }
@@ -169,14 +172,14 @@ fun AlbumListItem(
                 if (album.cover.isNotEmpty()) {
                     AsyncImage(
                         model = album.cover,
-                        contentDescription = "Cover de ${album.name}",
+                        contentDescription = "${context.getString(R.string.content_desc_cover_prefix)} ${album.name}",
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(150.dp),
                         contentScale = ContentScale.Crop
                     )
                 } else {
-                    Text("Sin imagen")
+                    Text(context.getString(R.string.content_desc_no_image))
                 }
             }
 
@@ -335,7 +338,7 @@ fun ExpandedAlbumContent(album: Album) {
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Person,
-                                contentDescription = "Sin imagen",
+                                contentDescription = context.getString(R.string.content_desc_no_image),
                                 tint = Color.White,
                                 modifier = Modifier.size(32.dp)
                             )
@@ -477,7 +480,7 @@ fun AlbumListScreenPreview() {
     ) {
         // Header
         Text(
-            text = "🎵 Catálogo",
+            text = "🎵 Catálogo", // Preview: usar string hardcodeado
             fontSize = 20.sp,
             modifier = Modifier.padding(bottom = 12.dp)
         )

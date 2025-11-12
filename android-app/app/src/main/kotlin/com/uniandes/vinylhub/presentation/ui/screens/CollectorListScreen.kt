@@ -27,12 +27,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.uniandes.vinylhub.R
 import com.uniandes.vinylhub.data.model.Collector
 import com.uniandes.vinylhub.presentation.viewmodel.CollectorViewModel
 
@@ -42,6 +44,7 @@ fun CollectorListScreen(
     onCollectorClick: (Int) -> Unit,
     onBackToHome: () -> Unit = {}
 ) {
+    val context = LocalContext.current
     val collectors: List<Collector> by viewModel?.collectors?.collectAsState(initial = emptyList()) ?: androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf(emptyList()) }
 
     Column(
@@ -51,7 +54,7 @@ fun CollectorListScreen(
     ) {
         // Header
         Text(
-            text = "👥 Coleccionistas",
+            text = context.getString(R.string.title_collectors),
             fontSize = 20.sp,
             modifier = Modifier.padding(bottom = 12.dp)
         )
@@ -81,7 +84,7 @@ fun CollectorListScreen(
                 ) {
                     CircularProgressIndicator()
                     Text(
-                        text = "Cargando coleccionistas...",
+                        text = context.getString(R.string.loading_collectors),
                         modifier = Modifier.padding(top = 16.dp)
                     )
                 }
@@ -216,7 +219,7 @@ fun CollectorListItem(
             modifier = Modifier.padding(start = 8.dp),
             border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF9E9E9E))
         ) {
-            Text("Detalles", color = androidx.compose.ui.graphics.Color(0xFF9E9E9E))
+            Text(context.getString(R.string.button_details), color = androidx.compose.ui.graphics.Color(0xFF9E9E9E))
         }
         }
     }
@@ -276,7 +279,7 @@ fun CollectorListScreenPreview() {
             .padding(16.dp)
     ) {
         Text(
-            text = "👥 Coleccionistas",
+            text = "👥 Coleccionistas", // Preview: usar string hardcodeado
             fontSize = 20.sp,
             modifier = Modifier.padding(bottom = 12.dp)
         )

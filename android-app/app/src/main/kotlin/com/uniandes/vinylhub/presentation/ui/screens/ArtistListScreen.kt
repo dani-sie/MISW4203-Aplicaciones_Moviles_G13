@@ -24,12 +24,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.uniandes.vinylhub.R
 import com.uniandes.vinylhub.data.model.Artist
 import com.uniandes.vinylhub.presentation.viewmodel.ArtistViewModel
 
@@ -39,6 +41,7 @@ fun ArtistListScreen(
     onArtistClick: (Int) -> Unit,
     onBackToHome: () -> Unit = {}
 ) {
+    val context = LocalContext.current
     val artists: List<Artist> by viewModel.artists.collectAsState(initial = emptyList())
 
     Column(
@@ -48,7 +51,7 @@ fun ArtistListScreen(
     ) {
         // Header
         Text(
-            text = "👥 Artistas",
+            text = context.getString(R.string.title_artists),
             fontSize = 20.sp,
             modifier = Modifier.padding(bottom = 12.dp)
         )
@@ -78,7 +81,7 @@ fun ArtistListScreen(
                 ) {
                     CircularProgressIndicator()
                     Text(
-                        text = "Cargando artistas...",
+                        text = context.getString(R.string.loading_artists),
                         modifier = Modifier.padding(top = 16.dp)
                     )
                 }
@@ -189,7 +192,7 @@ fun ArtistListItem(
             modifier = Modifier.padding(start = 8.dp),
             border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFF9E9E9E))
         ) {
-            Text("Detalles", color = androidx.compose.ui.graphics.Color(0xFF9E9E9E))
+            Text(context.getString(R.string.button_details), color = androidx.compose.ui.graphics.Color(0xFF9E9E9E))
         }
     }
 }
@@ -246,7 +249,7 @@ fun ArtistListScreenPreview() {
             .padding(16.dp)
     ) {
         Text(
-            text = "👥 Artistas",
+            text = "👥 Artistas", // Preview: usar string hardcodeado
             fontSize = 20.sp,
             modifier = Modifier.padding(bottom = 12.dp)
         )

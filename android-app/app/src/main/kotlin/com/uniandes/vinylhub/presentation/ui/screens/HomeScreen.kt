@@ -9,10 +9,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.uniandes.vinylhub.R
 import com.uniandes.vinylhub.ui.theme.VinylHubTheme
 
 @Composable
@@ -21,6 +23,8 @@ fun HomeScreen(
     onNavigateToArtists: () -> Unit = {},
     onNavigateToCollectors: () -> Unit = {}
 ) {
+    val context = LocalContext.current
+    
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -52,21 +56,21 @@ fun HomeScreen(
             onClick = onNavigateToAlbums,
             modifier = Modifier.padding(16.dp)
         ) {
-            Text("Ver Catálogo de Álbumes")
+            Text(context.getString(R.string.nav_albums))
         }
 
         Button(
             onClick = onNavigateToArtists,
             modifier = Modifier.padding(16.dp)
         ) {
-            Text("Ver Listado de Artistas")
+            Text(context.getString(R.string.nav_artists))
         }
 
         Button(
             onClick = onNavigateToCollectors,
             modifier = Modifier.padding(16.dp)
         ) {
-            Text("Ver Listado de Coleccionistas")
+            Text(context.getString(R.string.nav_collectors))
         }
     }
 }

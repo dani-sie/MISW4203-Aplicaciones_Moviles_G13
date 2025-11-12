@@ -7,6 +7,7 @@ import com.uniandes.vinylhub.presentation.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import com.uniandes.vinylhub.ui.TestConstants.*
 
 /**
  * Pruebas E2E para HU02: Consultar detalle de un álbum
@@ -24,11 +25,11 @@ class AlbumDetailScreenTest {
     @Test
     fun testNavigationToAlbumDetail() {
         // Arrange: Navegar a la lista de álbumes
-        composeTestRule.onNodeWithText("Ver Catálogo de Álbumes").performClick()
+        composeTestRule.onNodeWithText(NAV_ALBUMS).performClick()
         
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             try {
-                composeTestRule.onAllNodesWithText("Cargando álbumes...")
+                composeTestRule.onAllNodesWithText(LOADING_ALBUMS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -39,7 +40,7 @@ class AlbumDetailScreenTest {
         
         // Act: Hacer clic en la imagen del primer álbum
         // Las imágenes tienen contentDescription "Cover de [nombre]"
-        composeTestRule.onAllNodes(hasContentDescription("Cover de", substring = true))
+        composeTestRule.onAllNodes(hasContentDescription(CONTENT_DESC_COVER_PREFIX, substring = true))
             .onFirst()
             .performClick()
         
@@ -47,7 +48,7 @@ class AlbumDetailScreenTest {
         
         // Assert: Verificar que se muestra la pantalla de detalle
         // La pantalla de detalle tiene un botón "Volver"
-        composeTestRule.onNodeWithContentDescription("Volver").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription(BUTTON_BACK).assertIsDisplayed()
     }
 
     /**
@@ -57,11 +58,11 @@ class AlbumDetailScreenTest {
     @Test
     fun testAlbumTracksAreDisplayed() {
         // Arrange: Navegar al detalle de un álbum
-        composeTestRule.onNodeWithText("Ver Catálogo de Álbumes").performClick()
+        composeTestRule.onNodeWithText(NAV_ALBUMS).performClick()
         
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             try {
-                composeTestRule.onAllNodesWithText("Cargando álbumes...")
+                composeTestRule.onAllNodesWithText(LOADING_ALBUMS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -70,7 +71,7 @@ class AlbumDetailScreenTest {
         
         Thread.sleep(3000)
         
-        composeTestRule.onAllNodes(hasContentDescription("Cover de", substring = true))
+        composeTestRule.onAllNodes(hasContentDescription(CONTENT_DESC_COVER_PREFIX, substring = true))
             .onFirst()
             .performClick()
         
@@ -78,7 +79,7 @@ class AlbumDetailScreenTest {
         
         // Act & Assert: Verificar que se muestra información del álbum
         // Buscar secciones comunes en el detalle
-        composeTestRule.onNodeWithContentDescription("Volver").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription(BUTTON_BACK).assertIsDisplayed()
         
         // La pantalla de detalle debe mostrar información del álbum
         // (tracks, performers, comments, etc.)
@@ -91,11 +92,11 @@ class AlbumDetailScreenTest {
     @Test
     fun testBackNavigationFromAlbumDetail() {
         // Arrange: Navegar al detalle de un álbum
-        composeTestRule.onNodeWithText("Ver Catálogo de Álbumes").performClick()
+        composeTestRule.onNodeWithText(NAV_ALBUMS).performClick()
         
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             try {
-                composeTestRule.onAllNodesWithText("Cargando álbumes...")
+                composeTestRule.onAllNodesWithText(LOADING_ALBUMS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -104,19 +105,19 @@ class AlbumDetailScreenTest {
         
         Thread.sleep(3000)
         
-        composeTestRule.onAllNodes(hasContentDescription("Cover de", substring = true))
+        composeTestRule.onAllNodes(hasContentDescription(CONTENT_DESC_COVER_PREFIX, substring = true))
             .onFirst()
             .performClick()
         
         Thread.sleep(2000)
         
         // Act: Hacer clic en el botón "Volver"
-        composeTestRule.onNodeWithContentDescription("Volver").performClick()
+        composeTestRule.onNodeWithContentDescription(BUTTON_BACK).performClick()
         
         Thread.sleep(1000)
         
         // Assert: Verificar que regresamos a la lista de álbumes
-        composeTestRule.onNodeWithText("🎵 Catálogo").assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_CATALOG).assertIsDisplayed()
     }
 }
 

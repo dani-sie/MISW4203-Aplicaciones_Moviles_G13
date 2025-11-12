@@ -7,6 +7,7 @@ import com.uniandes.vinylhub.presentation.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import com.uniandes.vinylhub.ui.TestConstants.*
 
 /**
  * Pruebas E2E para HU03: Consultar listado de artistas
@@ -28,14 +29,14 @@ class ArtistListScreenTest {
         composeTestRule.onNodeWithText("🎵 VinylHub").assertIsDisplayed()
         
         // Act: Hacer clic en el botón de artistas
-        composeTestRule.onNodeWithText("Ver Listado de Artistas").performClick()
+        composeTestRule.onNodeWithText(NAV_ARTISTS).performClick()
         
         // Assert: Verificar que se muestra la pantalla de artistas
         composeTestRule.waitUntil(timeoutMillis = 5000) {
-            composeTestRule.onAllNodesWithText("👥 Artistas")
+            composeTestRule.onAllNodesWithText(TITLE_ARTISTS)
                 .fetchSemanticsNodes().isNotEmpty()
         }
-        composeTestRule.onNodeWithText("👥 Artistas").assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_ARTISTS).assertIsDisplayed()
     }
 
     /**
@@ -45,12 +46,12 @@ class ArtistListScreenTest {
     @Test
     fun testArtistListLoadsFromAPI() {
         // Arrange: Navegar a la lista de artistas
-        composeTestRule.onNodeWithText("Ver Listado de Artistas").performClick()
+        composeTestRule.onNodeWithText(NAV_ARTISTS).performClick()
         
         // Act: Esperar a que se carguen los artistas
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             try {
-                composeTestRule.onAllNodesWithText("Cargando artistas...")
+                composeTestRule.onAllNodesWithText(LOADING_ARTISTS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -60,7 +61,7 @@ class ArtistListScreenTest {
         Thread.sleep(2000) // Dar tiempo para que se rendericen los artistas
         
         // Assert: Verificar que no se muestra el mensaje de carga
-        composeTestRule.onNodeWithText("👥 Artistas").assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_ARTISTS).assertIsDisplayed()
         
         // Verificar que hay un campo de búsqueda
         composeTestRule.onNodeWithText("Buscar artista").assertIsDisplayed()

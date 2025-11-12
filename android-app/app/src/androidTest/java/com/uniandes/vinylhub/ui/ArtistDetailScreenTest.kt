@@ -7,6 +7,7 @@ import com.uniandes.vinylhub.presentation.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import com.uniandes.vinylhub.ui.TestConstants.*
 
 /**
  * Pruebas E2E para HU04: Consultar detalle de un artista
@@ -24,11 +25,11 @@ class ArtistDetailScreenTest {
     @Test
     fun testNavigationToArtistDetail() {
         // Arrange: Navegar a la lista de artistas
-        composeTestRule.onNodeWithText("Ver Listado de Artistas").performClick()
+        composeTestRule.onNodeWithText(NAV_ARTISTS).performClick()
 
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             try {
-                composeTestRule.onAllNodesWithText("Cargando artistas...")
+                composeTestRule.onAllNodesWithText(LOADING_ARTISTS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -38,15 +39,15 @@ class ArtistDetailScreenTest {
         Thread.sleep(3000) // Esperar a que se rendericen los artistas
 
         // Act: Hacer clic en el botón "Detalles" del primer artista
-        composeTestRule.onAllNodesWithText("Detalles")
+        composeTestRule.onAllNodesWithText(BUTTON_DETAILS)
             .onFirst()
             .performClick()
 
         Thread.sleep(2000) // Esperar navegación
 
         // Assert: Verificar que se muestra la pantalla de detalle
-        composeTestRule.onNodeWithContentDescription("Volver").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Artista").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription(BUTTON_BACK).assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_ARTIST).assertIsDisplayed()
     }
 
     /**
@@ -56,11 +57,11 @@ class ArtistDetailScreenTest {
     @Test
     fun testArtistAlbumsAreDisplayed() {
         // Arrange: Navegar al detalle de un artista
-        composeTestRule.onNodeWithText("Ver Listado de Artistas").performClick()
+        composeTestRule.onNodeWithText(NAV_ARTISTS).performClick()
 
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             try {
-                composeTestRule.onAllNodesWithText("Cargando artistas...")
+                composeTestRule.onAllNodesWithText(LOADING_ARTISTS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -69,15 +70,15 @@ class ArtistDetailScreenTest {
 
         Thread.sleep(3000)
 
-        composeTestRule.onAllNodesWithText("Detalles")
+        composeTestRule.onAllNodesWithText(BUTTON_DETAILS)
             .onFirst()
             .performClick()
 
         Thread.sleep(3000) // Esperar carga del detalle
 
         // Act & Assert: Verificar que se muestra información del artista
-        composeTestRule.onNodeWithContentDescription("Volver").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Artista").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription(BUTTON_BACK).assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_ARTIST).assertIsDisplayed()
     }
 
     /**
@@ -87,11 +88,11 @@ class ArtistDetailScreenTest {
     @Test
     fun testBackNavigationFromArtistDetail() {
         // Arrange: Navegar al detalle de un artista
-        composeTestRule.onNodeWithText("Ver Listado de Artistas").performClick()
+        composeTestRule.onNodeWithText(NAV_ARTISTS).performClick()
 
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             try {
-                composeTestRule.onAllNodesWithText("Cargando artistas...")
+                composeTestRule.onAllNodesWithText(LOADING_ARTISTS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -100,19 +101,19 @@ class ArtistDetailScreenTest {
 
         Thread.sleep(3000)
 
-        composeTestRule.onAllNodesWithText("Detalles")
+        composeTestRule.onAllNodesWithText(BUTTON_DETAILS)
             .onFirst()
             .performClick()
 
         Thread.sleep(2000)
 
         // Act: Hacer clic en el botón "Volver"
-        composeTestRule.onNodeWithContentDescription("Volver").performClick()
+        composeTestRule.onNodeWithContentDescription(BUTTON_BACK).performClick()
 
         Thread.sleep(1000)
 
         // Assert: Verificar que regresamos a la lista de artistas
-        composeTestRule.onNodeWithText("👥 Artistas").assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_ARTISTS).assertIsDisplayed()
     }
 }
 

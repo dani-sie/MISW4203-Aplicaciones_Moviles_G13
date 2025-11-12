@@ -7,6 +7,7 @@ import com.uniandes.vinylhub.presentation.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import com.uniandes.vinylhub.ui.TestConstants.*
 
 /**
  * Pruebas E2E para HU06: Consultar detalle de un coleccionista
@@ -24,11 +25,11 @@ class CollectorDetailScreenTest {
     @Test
     fun testNavigationToCollectorDetail() {
         // Arrange: Navegar a la lista de coleccionistas
-        composeTestRule.onNodeWithText("Ver Listado de Coleccionistas").performClick()
+        composeTestRule.onNodeWithText(NAV_COLLECTORS).performClick()
 
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             try {
-                composeTestRule.onAllNodesWithText("Cargando coleccionistas...")
+                composeTestRule.onAllNodesWithText(LOADING_COLLECTORS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -38,15 +39,15 @@ class CollectorDetailScreenTest {
         Thread.sleep(3000) // Esperar a que se rendericen los coleccionistas
 
         // Act: Hacer clic en el botón "Detalles" del primer coleccionista
-        composeTestRule.onAllNodesWithText("Detalles")
+        composeTestRule.onAllNodesWithText(BUTTON_DETAILS)
             .onFirst()
             .performClick()
 
         Thread.sleep(2000) // Esperar navegación
 
         // Assert: Verificar que se muestra la pantalla de detalle (título "Perfil")
-        composeTestRule.onNodeWithContentDescription("Volver").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Perfil").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription(BUTTON_BACK).assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_PROFILE).assertIsDisplayed()
     }
 
     /**
@@ -56,11 +57,11 @@ class CollectorDetailScreenTest {
     @Test
     fun testCollectorAlbumsAreDisplayed() {
         // Arrange: Navegar al detalle de un coleccionista
-        composeTestRule.onNodeWithText("Ver Listado de Coleccionistas").performClick()
+        composeTestRule.onNodeWithText(NAV_COLLECTORS).performClick()
 
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             try {
-                composeTestRule.onAllNodesWithText("Cargando coleccionistas...")
+                composeTestRule.onAllNodesWithText(LOADING_COLLECTORS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -69,15 +70,15 @@ class CollectorDetailScreenTest {
 
         Thread.sleep(3000)
 
-        composeTestRule.onAllNodesWithText("Detalles")
+        composeTestRule.onAllNodesWithText(BUTTON_DETAILS)
             .onFirst()
             .performClick()
 
         Thread.sleep(3000) // Esperar carga del detalle
 
         // Act & Assert: Verificar que se muestra información del coleccionista
-        composeTestRule.onNodeWithContentDescription("Volver").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Perfil").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription(BUTTON_BACK).assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_PROFILE).assertIsDisplayed()
     }
 
     /**
@@ -87,11 +88,11 @@ class CollectorDetailScreenTest {
     @Test
     fun testBackNavigationFromCollectorDetail() {
         // Arrange: Navegar al detalle de un coleccionista
-        composeTestRule.onNodeWithText("Ver Listado de Coleccionistas").performClick()
+        composeTestRule.onNodeWithText(NAV_COLLECTORS).performClick()
 
         composeTestRule.waitUntil(timeoutMillis = 10000) {
             try {
-                composeTestRule.onAllNodesWithText("Cargando coleccionistas...")
+                composeTestRule.onAllNodesWithText(LOADING_COLLECTORS)
                     .fetchSemanticsNodes().isEmpty()
             } catch (e: Exception) {
                 true
@@ -100,19 +101,19 @@ class CollectorDetailScreenTest {
 
         Thread.sleep(3000)
 
-        composeTestRule.onAllNodesWithText("Detalles")
+        composeTestRule.onAllNodesWithText(BUTTON_DETAILS)
             .onFirst()
             .performClick()
 
         Thread.sleep(2000)
 
         // Act: Hacer clic en el botón "Volver"
-        composeTestRule.onNodeWithContentDescription("Volver").performClick()
+        composeTestRule.onNodeWithContentDescription(BUTTON_BACK).performClick()
 
         Thread.sleep(1000)
 
         // Assert: Verificar que regresamos a la lista de coleccionistas
-        composeTestRule.onNodeWithText("👥 Coleccionistas").assertIsDisplayed()
+        composeTestRule.onNodeWithText(TITLE_COLLECTORS).assertIsDisplayed()
     }
 }
 

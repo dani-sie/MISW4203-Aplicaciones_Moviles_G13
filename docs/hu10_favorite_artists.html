@@ -143,6 +143,7 @@
     document.querySelectorAll('.add-fav').forEach(function(btn){
       btn.addEventListener('click', function(){
         var item = this.closest('.list-group-item');
+        // Fix: Usar dataset directamente (ya estaba correcto, pero documentamos)
         var id = item.dataset.performerId;
         var name = item.dataset.performerName;
         var img = item.dataset.performerImage || 'https://picsum.photos/48?random';
@@ -152,9 +153,10 @@
 
         var wrapper = document.createElement('div');
         wrapper.className = 'list-group-item d-flex align-items-center';
-        wrapper.setAttribute('data-performer-id', id);
-        wrapper.setAttribute('data-performer-name', name);
-        wrapper.setAttribute('data-performer-image', img);
+        // Fix: Usar dataset en lugar de setAttribute para atributos data-*
+        wrapper.dataset.performerId = id;
+        wrapper.dataset.performerName = name;
+        wrapper.dataset.performerImage = img;
         wrapper.innerHTML = `
           <img src="${img}" class="artist-avatar mr-3" alt="${name}">
           <div class="flex-fill">${name}</div>

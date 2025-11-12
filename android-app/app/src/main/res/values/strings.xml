@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">VinylHub</string>
+    
+    <!-- Navegación -->
+    <string name="nav_albums">Ver Catálogo de Álbumes</string>
+    <string name="nav_artists">Ver Listado de Artistas</string>
+    <string name="nav_collectors">Ver Listado de Coleccionistas</string>
+    
+    <!-- Títulos de pantallas -->
+    <string name="title_catalog">🎵 Catálogo</string>
+    <string name="title_artists">👥 Artistas</string>
+    <string name="title_collectors">👥 Coleccionistas</string>
+    <string name="title_artist">Artista</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_album">Álbum</string>
+    
+    <!-- Mensajes de carga -->
+    <string name="loading_albums">Cargando álbumes…</string>
+    <string name="loading_artists">Cargando artistas…</string>
+    <string name="loading_collectors">Cargando coleccionistas…</string>
+    
+    <!-- Controles -->
+    <string name="button_details">Detalles</string>
+    <string name="button_back">Volver</string>
+    
+    <!-- Content descriptions -->
+    <string name="content_desc_no_image">Sin imagen</string>
+    <string name="content_desc_cover_prefix">Cover de</string>
 </resources>
