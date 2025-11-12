@@ -10,34 +10,39 @@ object RetrofitClient {
     
     private const val BASE_URL = "https://api.example.com/api/"
     
-    private val httpClient: OkHttpClient
-        get() {
-            val loggingInterceptor = HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }
-            
-            return OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .build()
+    // Fix: Usar lazy initialization para evitar crear múltiples instancias
+    private val httpClient: OkHttpClient by lazy {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
         }
+        
+        OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .build()
+    }
     
-    private val retrofit: Retrofit
-        get() = Retrofit.Builder()
+    // Fix: Usar lazy initialization para evitar crear múltiples instancias
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
     
-    val albumService: AlbumService
-        get() = retrofit.create(AlbumService::class.java)
+    val albumService: AlbumService by lazy {
+        retrofit.create(AlbumService::class.java)
+    }
     
-    val artistService: ArtistService
-        get() = retrofit.create(ArtistService::class.java)
+    val artistService: ArtistService by lazy {
+        retrofit.create(ArtistService::class.java)
+    }
     
-    val collectorService: CollectorService
-        get() = retrofit.create(CollectorService::class.java)
+    val collectorService: CollectorService by lazy {
+        retrofit.create(CollectorService::class.java)
+    }
 }
 
