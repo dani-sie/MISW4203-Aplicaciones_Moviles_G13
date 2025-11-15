@@ -117,6 +117,8 @@ fun ArtistListItem(
     artist: Artist,
     onClick: () -> Unit
 ) {
+    val context = LocalContext.current
+
     Row(
         modifier = Modifier
             .fillMaxWidth()

@@ -7,7 +7,12 @@ import com.uniandes.vinylhub.presentation.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import com.uniandes.vinylhub.ui.TestConstants.*
+import com.uniandes.vinylhub.ui.TestConstants.Companion.BUTTON_BACK
+import com.uniandes.vinylhub.ui.TestConstants.Companion.BUTTON_DETAILS
+import com.uniandes.vinylhub.ui.TestConstants.Companion.LOADING_COLLECTORS
+import com.uniandes.vinylhub.ui.TestConstants.Companion.NAV_COLLECTORS
+import com.uniandes.vinylhub.ui.TestConstants.Companion.TITLE_COLLECTORS
+import com.uniandes.vinylhub.ui.TestConstants.Companion.TITLE_PROFILE
 
 /**
  * Pruebas E2E para HU06: Consultar detalle de un coleccionista

@@ -7,7 +7,9 @@ import com.uniandes.vinylhub.presentation.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import com.uniandes.vinylhub.ui.TestConstants.*
+import com.uniandes.vinylhub.ui.TestConstants.Companion.LOADING_ARTISTS
+import com.uniandes.vinylhub.ui.TestConstants.Companion.NAV_ARTISTS
+import com.uniandes.vinylhub.ui.TestConstants.Companion.TITLE_ARTISTS
 
 /**
  * Pruebas E2E para HU03: Consultar listado de artistas

@@ -152,6 +152,8 @@ fun AlbumListItem(
     onClick: () -> Unit,
     onImageClick: () -> Unit = {}
 ) {
+    val context = LocalContext.current
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -245,6 +247,7 @@ fun AlbumListItem(
 
 @Composable
 fun ExpandedAlbumContent(album: Album) {
+    val context = LocalContext.current
     android.util.Log.d("ExpandedAlbumContent", "Album: ${album.name}, tracks=${album.tracks.size}, performers=${album.performers.size}, comments=${album.comments.size}")
 
     HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp))

@@ -133,6 +133,8 @@ fun AlbumDetailContent(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+
     LazyColumn(
         modifier = modifier.fillMaxWidth(),
         contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)

@@ -122,6 +122,8 @@ fun CollectorListItem(
     collector: Collector,
     onClick: () -> Unit
 ) {
+    val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
