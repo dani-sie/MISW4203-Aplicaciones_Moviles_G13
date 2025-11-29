@@ -6,6 +6,7 @@ sealed class NavRoutes(val route: String) {
         fun createRoute(albumId: Int) = "album_detail/$albumId"
     }
     object CreateAlbum : NavRoutes("create_album")
+    object AssociateTracks : NavRoutes("associate_tracks")
 
     object ArtistList : NavRoutes("artist_list")
     object ArtistDetail : NavRoutes("artist_detail/{artistId}") {

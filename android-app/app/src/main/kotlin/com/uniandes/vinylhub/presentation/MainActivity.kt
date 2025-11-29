@@ -19,6 +19,7 @@ import com.uniandes.vinylhub.presentation.navigation.NavRoutes
 import com.uniandes.vinylhub.presentation.ui.screens.AlbumDetailScreen
 import com.uniandes.vinylhub.presentation.ui.screens.AlbumListScreen
 import com.uniandes.vinylhub.presentation.ui.screens.ArtistListScreen
+import com.uniandes.vinylhub.presentation.ui.screens.AssociateTracksScreen
 import com.uniandes.vinylhub.presentation.ui.screens.CollectorListScreen
 import com.uniandes.vinylhub.presentation.ui.screens.CreateAlbumScreen
 import com.uniandes.vinylhub.presentation.ui.screens.HomeScreen
@@ -79,6 +80,9 @@ fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel
                 },
                 onNavigateToCreateAlbum = {
                     navController.navigate(NavRoutes.CreateAlbum.route)
+                },
+                onNavigateToAssociateTracks = {
+                    navController.navigate(NavRoutes.AssociateTracks.route)
                 }
             )
         }
@@ -186,6 +190,16 @@ fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel
                 onAlbumCreated = { albumId ->
                     // Navegar al detalle del álbum recién creado
                     navController.navigate(NavRoutes.AlbumDetail.createRoute(albumId)) {
+                        popUpTo(NavRoutes.Home.route) { inclusive = false }
+                    }
+                }
+            )
+        }
+        composable(NavRoutes.AssociateTracks.route) {
+            AssociateTracksScreen(
+                albumViewModel = albumViewModel,
+                onBackClick = {
+                    navController.navigate(NavRoutes.Home.route) {
                         popUpTo(NavRoutes.Home.route) { inclusive = false }
                     }
                 }

@@ -219,5 +219,55 @@ class AlbumRepository @Inject constructor(
             null
         }
     }
+
+    suspend fun getAlbumTracks(albumId: Int): List<Track> {
+        return try {
+            android.util.Log.d("AlbumRepository", "Obteniendo tracks del álbum $albumId")
+            val tracks = albumService.getAlbumTracks(albumId)
+            android.util.Log.d("AlbumRepository", "Tracks obtenidos: ${tracks.size}")
+            tracks.map { Track(it.id, it.name, it.duration) }
+        } catch (e: Exception) {
+            android.util.Log.e("AlbumRepository", "Error obteniendo tracks: ${e.message}", e)
+            emptyList()
+        }
+    }
+
+    suspend fun addTrackToAlbum(albumId: Int, name: String, duration: String): Track? {
+        return try {
+            android.util.Log.d("AlbumRepository", "Agregando track '$name' al álbum $albumId")
+
+            val request = com.uniandes.vinylhub.data.remote.CreateTrackRequest(
+                name = name,
+                duration = duration
+            )
+
+            val apiResponse = albumService.addTrackToAlbum(albumId, request)
+            android.util.Log.d("AlbumRepository", "Track creado con ID: ${apiResponse.id}")
+
+            val track = Track(
+                id = apiResponse.id,
+                name = apiResponse.name,
+                duration = apiResponse.duration
+            )
+
+            // Actualizar el álbum en memoria con el nuevo track
+            val albumInMemory = albumsInMemory[albumId]
+            if (albumInMemory != null) {
+                val updatedTracks = albumInMemory.tracks + track
+                val updatedAlbum = albumInMemory.copy(
+                    tracksCount = updatedTracks.size
+                ).apply {
+                    tracks = updatedTracks
+                }
+                albumsInMemory = albumsInMemory + (albumId to updatedAlbum)
+                android.util.Log.d("AlbumRepository", "Álbum actualizado en memoria con nuevo track")
+            }
+
+            track
+        } catch (e: Exception) {
+            android.util.Log.e("AlbumRepository", "Error agregando track: ${e.message}", e)
+            null
+        }
+    }
 }
 

@@ -22,7 +22,8 @@ fun HomeScreen(
     onNavigateToAlbums: () -> Unit,
     onNavigateToArtists: () -> Unit = {},
     onNavigateToCollectors: () -> Unit = {},
-    onNavigateToCreateAlbum: () -> Unit = {}
+    onNavigateToCreateAlbum: () -> Unit = {},
+    onNavigateToAssociateTracks: () -> Unit = {}
 ) {
     val context = LocalContext.current
     
@@ -80,6 +81,13 @@ fun HomeScreen(
         ) {
             Text(context.getString(R.string.nav_create_album))
         }
+
+        Button(
+            onClick = onNavigateToAssociateTracks,
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(context.getString(R.string.nav_associate_tracks))
+        }
     }
 }
 
@@ -91,7 +99,8 @@ fun HomeScreenPreview() {
             onNavigateToAlbums = {},
             onNavigateToArtists = {},
             onNavigateToCollectors = {},
-            onNavigateToCreateAlbum = {}
+            onNavigateToCreateAlbum = {},
+            onNavigateToAssociateTracks = {}
         )
     }
 }

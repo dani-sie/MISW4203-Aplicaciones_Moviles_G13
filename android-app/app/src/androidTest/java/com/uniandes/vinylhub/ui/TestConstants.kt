@@ -11,6 +11,7 @@ class TestConstants {
     const val NAV_ARTISTS = "Ver Listado de Artistas"
     const val NAV_COLLECTORS = "Ver Listado de Coleccionistas"
     const val NAV_CREATE_ALBUM = "Crear Álbum"
+    const val NAV_ASSOCIATE_TRACKS = "Asociar Tracks"
 
     // Títulos de pantallas
     const val TITLE_CATALOG = "🎵 Catálogo"
@@ -20,6 +21,7 @@ class TestConstants {
     const val TITLE_PROFILE = "Perfil"
     const val TITLE_ALBUM = "Álbum"
     const val TITLE_CREATE_ALBUM = "Nuevo Álbum"
+    const val TITLE_ASSOCIATE_TRACKS = "Asociar Tracks"
 
     // Mensajes de carga
     const val LOADING_ALBUMS = "Cargando álbumes..."
@@ -42,6 +44,14 @@ class TestConstants {
     const val LABEL_RECORD_LABEL = "Sello discográfico"
     const val LABEL_GENRE = "Género"
     const val LABEL_DESCRIPTION = "Descripción"
+
+    // Labels de asociación de tracks
+    const val LABEL_SELECT_ALBUM = "Álbum"
+    const val SECTION_EXISTING_TRACKS = "TRACKS EXISTENTES"
+    const val SECTION_ADD_NEW_TRACK = "AGREGAR NUEVO TRACK"
+    const val LABEL_TRACK_TITLE = "Título"
+    const val LABEL_TRACK_DURATION = "Duración"
+    const val BUTTON_SAVE_ASSOCIATION = "Guardar asociación"
     }
 }
 

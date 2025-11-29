@@ -6,6 +6,7 @@
     <string name="nav_artists">Ver Listado de Artistas</string>
     <string name="nav_collectors">Ver Listado de Coleccionistas</string>
     <string name="nav_create_album">Crear Álbum</string>
+    <string name="nav_associate_tracks">Asociar Tracks</string>
     
     <!-- Títulos de pantallas -->
     <string name="title_catalog">🎵 Catálogo</string>
@@ -15,6 +16,7 @@
     <string name="title_profile">Perfil</string>
     <string name="title_album">Álbum</string>
     <string name="title_create_album">Nuevo Álbum</string>
+    <string name="title_associate_tracks">Asociar Tracks</string>
     
     <!-- Mensajes de carga -->
     <string name="loading_albums">Cargando álbumes…</string>
@@ -43,4 +45,19 @@
     <string name="button_create_album">Crear álbum</string>
     <string name="cover_url_note">El JSON usa una URL en el campo cover.</string>
     <string name="select_genre">Selecciona…</string>
+
+    <!-- Formulario de asociación de tracks -->
+    <string name="label_select_album">Álbum</string>
+    <string name="hint_select_album">Selecciona un álbum…</string>
+    <string name="section_existing_tracks">TRACKS EXISTENTES</string>
+    <string name="section_add_new_track">AGREGAR NUEVO TRACK</string>
+    <string name="label_track_title">Título</string>
+    <string name="label_track_duration">Duración</string>
+    <string name="hint_track_title">Ej: Contact</string>
+    <string name="hint_track_duration">7:47</string>
+    <string name="button_add_to_list">Agregar a la lista</string>
+    <string name="button_save_association">Guardar asociación</string>
+    <string name="no_tracks_message">No hay tracks asociados a este álbum</string>
+    <string name="loading_tracks">Cargando tracks…</string>
+    <string name="select_album_first">Selecciona un álbum primero</string>
 </resources>

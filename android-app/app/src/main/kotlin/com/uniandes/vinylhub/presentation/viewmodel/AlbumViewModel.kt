@@ -3,6 +3,7 @@ package com.uniandes.vinylhub.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uniandes.vinylhub.data.model.Album
+import com.uniandes.vinylhub.data.model.Track
 import com.uniandes.vinylhub.data.repository.AlbumRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -47,6 +48,14 @@ class AlbumViewModel @Inject constructor(
             genre = genre,
             recordLabel = recordLabel
         )
+    }
+
+    suspend fun getAlbumTracks(albumId: Int): List<Track> {
+        return albumRepository.getAlbumTracks(albumId)
+    }
+
+    suspend fun addTrackToAlbum(albumId: Int, name: String, duration: String): Track? {
+        return albumRepository.addTrackToAlbum(albumId, name, duration)
     }
 }
 

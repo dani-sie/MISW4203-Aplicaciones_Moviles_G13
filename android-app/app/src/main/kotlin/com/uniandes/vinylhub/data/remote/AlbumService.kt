@@ -16,6 +16,15 @@ interface AlbumService {
 
     @POST("albums")
     suspend fun createAlbum(@Body album: CreateAlbumRequest): AlbumApiResponse
+
+    @GET("albums/{albumId}/tracks")
+    suspend fun getAlbumTracks(@Path("albumId") albumId: Int): List<Track>
+
+    @POST("albums/{albumId}/tracks")
+    suspend fun addTrackToAlbum(
+        @Path("albumId") albumId: Int,
+        @Body track: CreateTrackRequest
+    ): TrackApiResponse
 }
 
 data class AlbumApiResponse(
@@ -113,5 +122,27 @@ data class CreateAlbumRequest(
 
     @SerializedName("recordLabel")
     val recordLabel: String
+)
+
+data class CreateTrackRequest(
+    @SerializedName("name")
+    val name: String,
+
+    @SerializedName("duration")
+    val duration: String
+)
+
+data class TrackApiResponse(
+    @SerializedName("id")
+    val id: Int,
+
+    @SerializedName("name")
+    val name: String,
+
+    @SerializedName("duration")
+    val duration: String,
+
+    @SerializedName("album")
+    val album: AlbumApiResponse? = null
 )
 
