@@ -20,6 +20,7 @@ import com.uniandes.vinylhub.presentation.ui.screens.AlbumDetailScreen
 import com.uniandes.vinylhub.presentation.ui.screens.AlbumListScreen
 import com.uniandes.vinylhub.presentation.ui.screens.ArtistListScreen
 import com.uniandes.vinylhub.presentation.ui.screens.CollectorListScreen
+import com.uniandes.vinylhub.presentation.ui.screens.CreateAlbumScreen
 import com.uniandes.vinylhub.presentation.ui.screens.HomeScreen
 import com.uniandes.vinylhub.presentation.viewmodel.AlbumViewModel
 import com.uniandes.vinylhub.presentation.viewmodel.ArtistViewModel
@@ -75,6 +76,9 @@ fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel
                 },
                 onNavigateToCollectors = {
                     navController.navigate(NavRoutes.CollectorList.route)
+                },
+                onNavigateToCreateAlbum = {
+                    navController.navigate(NavRoutes.CreateAlbum.route)
                 }
             )
         }
@@ -168,6 +172,22 @@ fun VinylHubApp(albumViewModel: AlbumViewModel, artistViewModel: ArtistViewModel
                 },
                 onAlbumClick = { albumId ->
                     navController.navigate("album_detail/$albumId")
+                }
+            )
+        }
+        composable(NavRoutes.CreateAlbum.route) {
+            CreateAlbumScreen(
+                viewModel = albumViewModel,
+                onBackClick = {
+                    navController.navigate(NavRoutes.Home.route) {
+                        popUpTo(NavRoutes.Home.route) { inclusive = false }
+                    }
+                },
+                onAlbumCreated = { albumId ->
+                    // Navegar al detalle del álbum recién creado
+                    navController.navigate(NavRoutes.AlbumDetail.createRoute(albumId)) {
+                        popUpTo(NavRoutes.Home.route) { inclusive = false }
+                    }
                 }
             )
         }

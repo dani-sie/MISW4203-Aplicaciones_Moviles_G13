@@ -21,7 +21,8 @@ import com.uniandes.vinylhub.ui.theme.VinylHubTheme
 fun HomeScreen(
     onNavigateToAlbums: () -> Unit,
     onNavigateToArtists: () -> Unit = {},
-    onNavigateToCollectors: () -> Unit = {}
+    onNavigateToCollectors: () -> Unit = {},
+    onNavigateToCreateAlbum: () -> Unit = {}
 ) {
     val context = LocalContext.current
     
@@ -72,6 +73,13 @@ fun HomeScreen(
         ) {
             Text(context.getString(R.string.nav_collectors))
         }
+
+        Button(
+            onClick = onNavigateToCreateAlbum,
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(context.getString(R.string.nav_create_album))
+        }
     }
 }
 
@@ -79,7 +87,12 @@ fun HomeScreen(
 @Composable
 fun HomeScreenPreview() {
     VinylHubTheme {
-        HomeScreen(onNavigateToAlbums = {}, onNavigateToArtists = {}, onNavigateToCollectors = {})
+        HomeScreen(
+            onNavigateToAlbums = {},
+            onNavigateToArtists = {},
+            onNavigateToCollectors = {},
+            onNavigateToCreateAlbum = {}
+        )
     }
 }
 

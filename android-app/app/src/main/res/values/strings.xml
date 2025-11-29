@@ -5,6 +5,7 @@
     <string name="nav_albums">Ver Catálogo de Álbumes</string>
     <string name="nav_artists">Ver Listado de Artistas</string>
     <string name="nav_collectors">Ver Listado de Coleccionistas</string>
+    <string name="nav_create_album">Crear Álbum</string>
     
     <!-- Títulos de pantallas -->
     <string name="title_catalog">🎵 Catálogo</string>
@@ -13,6 +14,7 @@
     <string name="title_artist">Artista</string>
     <string name="title_profile">Perfil</string>
     <string name="title_album">Álbum</string>
+    <string name="title_create_album">Nuevo Álbum</string>
     
     <!-- Mensajes de carga -->
     <string name="loading_albums">Cargando álbumes…</string>
@@ -26,4 +28,19 @@
     <!-- Content descriptions -->
     <string name="content_desc_no_image">Sin imagen</string>
     <string name="content_desc_cover_prefix">Cover de</string>
+
+    <!-- Formulario de creación de álbum -->
+    <string name="label_album_title">Título del álbum</string>
+    <string name="label_release_date">Fecha de lanzamiento</string>
+    <string name="label_cover_url">Portada (URL)</string>
+    <string name="label_record_label">Sello discográfico</string>
+    <string name="label_genre">Género</string>
+    <string name="label_description">Descripción</string>
+    <string name="hint_album_title">Ej: Buscando América</string>
+    <string name="hint_cover_url">https://…/cover.jpg</string>
+    <string name="hint_record_label">Selecciona…</string>
+    <string name="hint_description">Notas, contexto, ediciones, etc.</string>
+    <string name="button_create_album">Crear álbum</string>
+    <string name="cover_url_note">El JSON usa una URL en el campo cover.</string>
+    <string name="select_genre">Selecciona…</string>
 </resources>

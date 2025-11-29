@@ -1,7 +1,9 @@
 package com.uniandes.vinylhub.data.remote
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface AlbumService {
@@ -11,6 +13,9 @@ interface AlbumService {
 
     @GET("albums/{id}")
     suspend fun getAlbumById(@Path("id") id: Int): AlbumApiResponse
+
+    @POST("albums")
+    suspend fun createAlbum(@Body album: CreateAlbumRequest): AlbumApiResponse
 }
 
 data class AlbumApiResponse(
@@ -36,7 +41,7 @@ data class AlbumApiResponse(
     val recordLabel: String,
 
     @SerializedName("artists")
-    val artists: List<Int> = emptyList(),
+    val artists: List<Int>? = null,
 
     @SerializedName("tracks")
     val tracks: List<Track>? = null,
@@ -88,5 +93,25 @@ data class Comment(
 
     @SerializedName("rating")
     val rating: Int
+)
+
+data class CreateAlbumRequest(
+    @SerializedName("name")
+    val name: String,
+
+    @SerializedName("cover")
+    val cover: String,
+
+    @SerializedName("releaseDate")
+    val releaseDate: String,
+
+    @SerializedName("description")
+    val description: String,
+
+    @SerializedName("genre")
+    val genre: String,
+
+    @SerializedName("recordLabel")
+    val recordLabel: String
 )
 

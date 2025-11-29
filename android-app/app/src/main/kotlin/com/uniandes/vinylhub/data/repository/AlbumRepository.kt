@@ -163,5 +163,61 @@ class AlbumRepository @Inject constructor(
     suspend fun deleteAlbum(album: Album) {
         albumDao.deleteAlbum(album)
     }
+
+    suspend fun createAlbum(
+        name: String,
+        cover: String,
+        releaseDate: String,
+        description: String,
+        genre: String,
+        recordLabel: String
+    ): Album? {
+        return try {
+            android.util.Log.d("AlbumRepository", "Creando álbum: $name")
+
+            val request = com.uniandes.vinylhub.data.remote.CreateAlbumRequest(
+                name = name,
+                cover = cover,
+                releaseDate = releaseDate,
+                description = description,
+                genre = genre,
+                recordLabel = recordLabel
+            )
+
+            val apiResponse = albumService.createAlbum(request)
+            android.util.Log.d("AlbumRepository", "Álbum creado con ID: ${apiResponse.id}")
+
+            // Convertir la respuesta a Album
+            val album = Album(
+                id = apiResponse.id,
+                name = apiResponse.name,
+                description = apiResponse.description,
+                cover = apiResponse.cover,
+                releaseDate = apiResponse.releaseDate,
+                genre = apiResponse.genre,
+                recordLabel = apiResponse.recordLabel,
+                artists = apiResponse.artists ?: emptyList(),
+                tracksCount = apiResponse.tracks?.size ?: 0,
+                performersCount = apiResponse.performers?.size ?: 0,
+                commentsCount = apiResponse.comments?.size ?: 0
+            ).apply {
+                tracks = apiResponse.tracks?.map { Track(it.id, it.name, it.duration) } ?: emptyList()
+                performers = apiResponse.performers?.map { Performer(it.id, it.name, it.image, it.description, it.birthDate, it.creationDate) } ?: emptyList()
+                comments = apiResponse.comments?.map { Comment(it.id, it.description, it.rating) } ?: emptyList()
+            }
+
+            // Guardar en la base de datos local
+            albumDao.insertAlbum(album)
+
+            // Actualizar la memoria
+            albumsInMemory = albumsInMemory + (album.id to album)
+
+            android.util.Log.d("AlbumRepository", "Álbum guardado localmente")
+            album
+        } catch (e: Exception) {
+            android.util.Log.e("AlbumRepository", "Error creando álbum: ${e.message}", e)
+            null
+        }
+    }
 }
 

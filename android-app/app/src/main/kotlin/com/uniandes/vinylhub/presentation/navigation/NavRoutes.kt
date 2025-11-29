@@ -5,17 +5,18 @@ sealed class NavRoutes(val route: String) {
     object AlbumDetail : NavRoutes("album_detail/{albumId}") {
         fun createRoute(albumId: Int) = "album_detail/$albumId"
     }
-    
+    object CreateAlbum : NavRoutes("create_album")
+
     object ArtistList : NavRoutes("artist_list")
     object ArtistDetail : NavRoutes("artist_detail/{artistId}") {
         fun createRoute(artistId: Int) = "artist_detail/$artistId"
     }
-    
+
     object CollectorList : NavRoutes("collector_list")
     object CollectorDetail : NavRoutes("collector_detail/{collectorId}") {
         fun createRoute(collectorId: Int) = "collector_detail/$collectorId"
     }
-    
+
     object Home : NavRoutes("home")
 }
 

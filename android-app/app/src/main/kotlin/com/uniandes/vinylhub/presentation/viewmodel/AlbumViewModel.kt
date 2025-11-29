@@ -30,5 +30,23 @@ class AlbumViewModel @Inject constructor(
     suspend fun getAlbumById(id: Int): Album? {
         return albumRepository.getAlbumById(id)
     }
+
+    suspend fun createAlbum(
+        name: String,
+        cover: String,
+        releaseDate: String,
+        description: String,
+        genre: String,
+        recordLabel: String
+    ): Album? {
+        return albumRepository.createAlbum(
+            name = name,
+            cover = cover,
+            releaseDate = releaseDate,
+            description = description,
+            genre = genre,
+            recordLabel = recordLabel
+        )
+    }
 }
 
